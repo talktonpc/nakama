@@ -19,16 +19,17 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"regexp"
+	"time"
+
 	"github.com/gofrs/uuid"
-	"github.com/heroiclabs/nakama-common/api"
-	"github.com/heroiclabs/nakama-common/rtapi"
-	"github.com/heroiclabs/nakama-common/runtime"
 	"github.com/jackc/pgtype"
+	"github.com/talktonpc/nakama-common/api"
+	"github.com/talktonpc/nakama-common/rtapi"
+	"github.com/talktonpc/nakama-common/runtime"
 	"go.uber.org/zap"
 	"google.golang.org/protobuf/types/known/timestamppb"
 	"google.golang.org/protobuf/types/known/wrapperspb"
-	"regexp"
-	"time"
 )
 
 const (

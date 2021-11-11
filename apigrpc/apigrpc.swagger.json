@@ -5,7 +5,7 @@
     "version": "2.0",
     "contact": {
       "name": "The Nakama Authors \u0026 Contributors",
-      "url": "https://github.com/heroiclabs/nakama",
+      "url": "https://github.com/talktonpc/nakama",
       "email": "hello@heroiclabs.com"
     }
   },
@@ -4494,6 +4494,10 @@
         "appleId": {
           "type": "string",
           "description": "The Apple Sign In ID in the user's account."
+        },
+        "inventoryId": {
+          "type": "string",
+          "title": "Inventory ID"
         }
       },
       "description": "A user in the server."

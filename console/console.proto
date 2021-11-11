@@ -20,14 +20,14 @@ syntax = "proto3";
 package nakama.console;
 
 import "api/api.proto";
-import "github.com/heroiclabs/nakama-common/rtapi/realtime.proto";
+import "github.com/talktonpc/nakama-common/rtapi/realtime.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
-option go_package = "github.com/heroiclabs/nakama/v3/console";
+option go_package = "github.com/talktonpc/nakama/v3/console";
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   info: {
@@ -35,7 +35,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
     version: "2.0";
     contact: {
       name: "The Nakama Authors & Contributors";
-      url: "https://github.com/heroiclabs/nakama";
+      url: "https://github.com/talktonpc/nakama";
       email: "hello@heroiclabs.com";
     };
   };

@@ -16,11 +16,12 @@ package server
 
 import (
 	"fmt"
-	"github.com/heroiclabs/nakama-common/runtime"
 	"sync"
 
+	"github.com/talktonpc/nakama-common/runtime"
+
 	"github.com/gofrs/uuid"
-	"github.com/heroiclabs/nakama-common/rtapi"
+	"github.com/talktonpc/nakama-common/rtapi"
 	"go.uber.org/zap"
 )
 

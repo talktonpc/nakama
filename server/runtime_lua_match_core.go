@@ -25,9 +25,9 @@ import (
 	"time"
 
 	"github.com/gofrs/uuid"
-	"github.com/heroiclabs/nakama-common/rtapi"
-	lua "github.com/heroiclabs/nakama/v3/internal/gopher-lua"
-	"github.com/heroiclabs/nakama/v3/social"
+	"github.com/talktonpc/nakama-common/rtapi"
+	lua "github.com/talktonpc/nakama/v3/internal/gopher-lua"
+	"github.com/talktonpc/nakama/v3/social"
 	"go.uber.org/atomic"
 	"go.uber.org/zap"
 	"google.golang.org/protobuf/encoding/protojson"

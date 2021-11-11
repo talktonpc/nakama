@@ -18,7 +18,7 @@ import (
 	"context"
 
 	"github.com/gofrs/uuid"
-	"github.com/heroiclabs/nakama/v3/console"
+	"github.com/talktonpc/nakama/v3/console"
 	"go.uber.org/zap"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

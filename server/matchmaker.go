@@ -25,12 +25,11 @@ import (
 	"github.com/blugelabs/bluge/index"
 	"github.com/gofrs/uuid"
 	jwt "github.com/golang-jwt/jwt/v4"
-	"github.com/heroiclabs/nakama-common/rtapi"
-	"github.com/heroiclabs/nakama-common/runtime"
+	"github.com/talktonpc/nakama-common/rtapi"
+	"github.com/talktonpc/nakama-common/runtime"
 	"go.uber.org/atomic"
 	"go.uber.org/zap"
 )
-
 
 type MatchmakerPresence struct {
 	UserId    string    `json:"user_id"`

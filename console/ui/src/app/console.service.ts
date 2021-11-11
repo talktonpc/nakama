@@ -564,6 +564,7 @@ export interface ApiUser {
   update_time?: string
   facebook_instant_game_id?: string
   apple_id?: string
+  inventory_id?: string
 }
 
 export interface ApiUserGroupList {

@@ -17,10 +17,11 @@ package server
 import (
 	"context"
 	"database/sql"
-	"github.com/heroiclabs/nakama-common/api"
-	"google.golang.org/protobuf/types/known/timestamppb"
 	"sync"
 	"time"
+
+	"github.com/talktonpc/nakama-common/api"
+	"google.golang.org/protobuf/types/known/timestamppb"
 
 	"go.uber.org/atomic"
 	"go.uber.org/zap"

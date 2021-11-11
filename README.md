@@ -3,7 +3,7 @@
 
 [![GitHub release](https://img.shields.io/github/release/heroiclabs/nakama.svg)](https://heroiclabs.com/docs/nakama-download/)
 [![Forum](https://img.shields.io/badge/forum-online-success.svg)](https://forum.heroiclabs.com)
-[![License](https://img.shields.io/github/license/heroiclabs/nakama.svg)](https://github.com/heroiclabs/nakama/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/heroiclabs/nakama.svg)](https://github.com/talktonpc/nakama/blob/master/LICENSE)
 
 > Distributed server for social and realtime games and apps.
 
@@ -44,7 +44,7 @@ Nakama Docker images are maintained on [Docker Hub](https://hub.docker.com/r/her
 
 You can run the servers with native binaries for your platform.
 
-1. Download the server from our [releases](https://github.com/heroiclabs/nakama/releases) page and the [database](https://www.cockroachlabs.com/docs/stable/install-cockroachdb.html).
+1. Download the server from our [releases](https://github.com/talktonpc/nakama/releases) page and the [database](https://www.cockroachlabs.com/docs/stable/install-cockroachdb.html).
 
 2. Follow the database [instructions](https://www.cockroachlabs.com/docs/stable/start-a-local-cluster.html#before-you-begin) to start it.
 
@@ -84,7 +84,7 @@ Response:
 >     "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MjQ5OTU2NDksInVpZCI6Ijk5Y2Q1YzUyLWE5ODgtNGI2NC04YThhLTVmMTM5YTg4MTgxMiIsInVzbiI6InhBb1RxTUVSdFgifQ.-3_rXNYx3Q4jKuS7RkxeMWBzMNAm0vl93QxzRI8p_IY" <br>
 > }
 
-There's a number of official [client libraries](https://github.com/heroiclabs) available on GitHub with [documentation](https://heroiclabs.com/docs). The current platform/language support includes: .NET (in C#), Unity engine, JavaScript, Java (with Android), Unreal engine, Godot, Defold, and Swift (with iOS). If you'd like to contribute a client or request one let us know.
+There's a number of official [client libraries](https://github.com/talktonpc) available on GitHub with [documentation](https://heroiclabs.com/docs). The current platform/language support includes: .NET (in C#), Unity engine, JavaScript, Java (with Android), Unreal engine, Godot, Defold, and Swift (with iOS). If you'd like to contribute a client or request one let us know.
 
 ## Nakama Console
 
@@ -122,7 +122,7 @@ All dependencies required for a build are vendored as part of the Go project. We
 1. Download the source tree.
 
    ```shell
-   git clone "https://github.com/heroiclabs/nakama" nakama
+   git clone "https://github.com/talktonpc/nakama" nakama
    cd nakama
    ```
 
@@ -170,4 +170,4 @@ To build the codebase and generate all sources follow these steps.
 
 ### License
 
-This project is licensed under the [Apache-2 License](https://github.com/heroiclabs/nakama/blob/master/LICENSE).
+This project is licensed under the [Apache-2 License](https://github.com/talktonpc/nakama/blob/master/LICENSE).

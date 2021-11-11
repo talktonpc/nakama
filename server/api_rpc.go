@@ -25,7 +25,7 @@ import (
 	"github.com/gofrs/uuid"
 	"github.com/gorilla/mux"
 	grpcgw "github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
-	"github.com/heroiclabs/nakama-common/api"
+	"github.com/talktonpc/nakama-common/api"
 	"go.uber.org/zap"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"

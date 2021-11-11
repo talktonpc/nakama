@@ -25,7 +25,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/heroiclabs/nakama/v3/flags"
+	"github.com/talktonpc/nakama/v3/flags"
 	"go.uber.org/zap"
 	"gopkg.in/yaml.v2"
 )

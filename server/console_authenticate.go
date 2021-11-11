@@ -23,8 +23,8 @@ import (
 	"time"
 
 	jwt "github.com/golang-jwt/jwt/v4"
-	"github.com/heroiclabs/nakama/v3/console"
 	"github.com/jackc/pgtype"
+	"github.com/talktonpc/nakama/v3/console"
 	"go.uber.org/zap"
 	"golang.org/x/crypto/bcrypt"
 	"google.golang.org/grpc/codes"

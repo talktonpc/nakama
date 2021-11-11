@@ -22,8 +22,8 @@ import (
 	"strings"
 
 	"github.com/gofrs/uuid"
-	"github.com/heroiclabs/nakama/v3/social"
 	"github.com/jackc/pgconn"
+	"github.com/talktonpc/nakama/v3/social"
 	"go.uber.org/zap"
 	"golang.org/x/crypto/bcrypt"
 	"google.golang.org/grpc/codes"

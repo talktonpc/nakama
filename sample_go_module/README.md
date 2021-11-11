@@ -17,7 +17,7 @@ import (
   "context"
   "database/sql"
 
-  "github.com/heroiclabs/nakama-common/runtime"
+  "github.com/talktonpc/nakama-common/runtime"
 )
 
 func InitModule(ctx context.Context, logger runtime.Logger, db *sql.DB, nk runtime.NakamaModule, initializer runtime.Initializer) error {
@@ -43,7 +43,7 @@ To setup your own project to build modules for the game server you can follow th
 
     ```bash
     go mod init "plugin_code"
-    go get -u "github.com/heroiclabs/nakama-common@v1.4.0"
+    go get -u "github.com/talktonpc/nakama-common@v1.4.0"
     ```
 
    ⚠️ __NOTE__: If you're working on Nakama's master branch drop the `@v1.4.0` from the above snippet.
@@ -68,7 +68,7 @@ In a regular development cycle you will often recompile your plugin code and rer
     ./nakama --runtime.path "$HOME/plugin_code"
     ```
 
-   __TIP__: You can either build and run Nakama from source or you can download a prebuilt binary for your platform [here](https://github.com/heroiclabs/nakama/releases).
+   __TIP__: You can either build and run Nakama from source or you can download a prebuilt binary for your platform [here](https://github.com/talktonpc/nakama/releases).
 
 For more information on how the server loads modules have a look at [these](https://heroiclabs.com/docs/runtime-code-basics/#load-modules) docs. For general instructions on how to run the server give [these](https://heroiclabs.com/docs/install-start-server/#start-nakama) docs a read.
 
@@ -103,4 +103,4 @@ For Windows development and environments where you want to use our official Dock
 
 Have a look in this repo for more example code on how to create and use various parts of the game server Go runtime support. This project creates an implementation of the Unreal Engine `IOnlinePartySystem` interface which uses Nakama server.
 
-https://github.com/heroiclabs/nakama-unreal/tree/master/online_party_system
+https://github.com/talktonpc/nakama-unreal/tree/master/online_party_system

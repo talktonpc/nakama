@@ -24,8 +24,8 @@ import (
 
 	"github.com/gofrs/uuid"
 	"github.com/gorilla/websocket"
-	"github.com/heroiclabs/nakama-common/rtapi"
-	"github.com/heroiclabs/nakama-common/runtime"
+	"github.com/talktonpc/nakama-common/rtapi"
+	"github.com/talktonpc/nakama-common/runtime"
 	"go.uber.org/atomic"
 	"go.uber.org/zap"
 	"google.golang.org/protobuf/encoding/protojson"

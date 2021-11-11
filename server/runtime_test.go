@@ -26,8 +26,8 @@ import (
 	"testing"
 
 	"github.com/gofrs/uuid"
-	"github.com/heroiclabs/nakama-common/api"
-	"github.com/heroiclabs/nakama-common/rtapi"
+	"github.com/talktonpc/nakama-common/api"
+	"github.com/talktonpc/nakama-common/rtapi"
 	"golang.org/x/crypto/bcrypt"
 	"google.golang.org/protobuf/types/known/emptypb"
 )

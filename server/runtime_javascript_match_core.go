@@ -23,8 +23,8 @@ import (
 
 	"github.com/dop251/goja"
 	"github.com/gofrs/uuid"
-	"github.com/heroiclabs/nakama-common/rtapi"
-	"github.com/heroiclabs/nakama/v3/social"
+	"github.com/talktonpc/nakama-common/rtapi"
+	"github.com/talktonpc/nakama/v3/social"
 	"go.uber.org/atomic"
 	"go.uber.org/zap"
 	"google.golang.org/protobuf/encoding/protojson"

@@ -26,10 +26,10 @@ import (
 
 	"github.com/gofrs/uuid"
 
-	"github.com/heroiclabs/nakama-common/api"
-	"github.com/heroiclabs/nakama/v3/social"
 	"github.com/jackc/pgconn"
 	"github.com/jackc/pgtype"
+	"github.com/talktonpc/nakama-common/api"
+	"github.com/talktonpc/nakama/v3/social"
 	"go.uber.org/zap"
 	"golang.org/x/crypto/bcrypt"
 	"google.golang.org/grpc/codes"

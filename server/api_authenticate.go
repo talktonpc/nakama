@@ -24,7 +24,7 @@ import (
 
 	"github.com/gofrs/uuid"
 	jwt "github.com/golang-jwt/jwt/v4"
-	"github.com/heroiclabs/nakama-common/api"
+	"github.com/talktonpc/nakama-common/api"
 	"go.uber.org/zap"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

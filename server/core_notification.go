@@ -25,9 +25,9 @@ import (
 	"time"
 
 	"github.com/gofrs/uuid"
-	"github.com/heroiclabs/nakama-common/api"
-	"github.com/heroiclabs/nakama-common/rtapi"
 	"github.com/jackc/pgtype"
+	"github.com/talktonpc/nakama-common/api"
+	"github.com/talktonpc/nakama-common/rtapi"
 	"go.uber.org/zap"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )

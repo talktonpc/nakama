@@ -20,8 +20,8 @@ import (
 	"testing"
 
 	"github.com/gofrs/uuid"
-	"github.com/heroiclabs/nakama-common/runtime"
 	"github.com/stretchr/testify/assert"
+	"github.com/talktonpc/nakama-common/runtime"
 )
 
 func TestUpdateWalletSingleUser(t *testing.T) {

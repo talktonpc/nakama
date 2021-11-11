@@ -19,7 +19,7 @@ import (
 	"sync"
 
 	"github.com/gofrs/uuid"
-	"github.com/heroiclabs/nakama-common/rtapi"
+	"github.com/talktonpc/nakama-common/rtapi"
 	"go.uber.org/zap"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"

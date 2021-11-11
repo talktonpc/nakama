@@ -22,7 +22,7 @@ package nakama.api;
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
-option go_package = "github.com/heroiclabs/nakama-common/api";
+option go_package = "github.com/talktonpc/nakama-common/api";
 
 option java_multiple_files = true;
 option java_outer_classname = "NakamaApi";
@@ -1078,6 +1078,9 @@ message User {
   string facebook_instant_game_id = 17;
   // The Apple Sign In ID in the user's account.
   string apple_id = 18;
+
+  // Inventory ID
+  string inventory_id = 19;
 }
 
 // A list of groups belonging to a user, along with the user's role in each group.
@@ -1252,6 +1255,7 @@ message WriteTournamentRecordRequest {
   TournamentRecordWrite record = 2;
 }
 
+
 // Operator that can be used to override the one set in the leaderboard.
 enum Operator {
   // Do not override the leaderboard operator.
@@ -1265,3 +1269,22 @@ enum Operator {
   // Override the leaderboard operator with DECREMENT.
   DECREMENT = 4;
 }
+
+//##############################################################################
+// LONYCELL'S ADDON API, 2021-11-11
+//##############################################################################
+
+// Meta Charater clouth
+message Clouth {
+  int32 id = 1;
+  int32 hair = 2;
+  int32 chest = 3;
+  int32 legs = 4;
+  int32 feet = 5;
+  bool hasJacket = 6;
+  int32 jacket = 7;
+  bool hasGlass = 8;
+  int32 glass = 9;
+}
+
+

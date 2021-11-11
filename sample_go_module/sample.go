@@ -18,9 +18,9 @@ import (
 	"context"
 	"database/sql"
 
-	"github.com/heroiclabs/nakama-common/api"
-	"github.com/heroiclabs/nakama-common/rtapi"
-	"github.com/heroiclabs/nakama-common/runtime"
+	"github.com/talktonpc/nakama-common/api"
+	"github.com/talktonpc/nakama-common/rtapi"
+	"github.com/talktonpc/nakama-common/runtime"
 )
 
 func InitModule(ctx context.Context, logger runtime.Logger, db *sql.DB, nk runtime.NakamaModule, initializer runtime.Initializer) error {

@@ -28,11 +28,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/heroiclabs/nakama/v3/server"
 	"github.com/jackc/pgconn"
 	"github.com/jackc/pgerrcode"
 	_ "github.com/jackc/pgx/v4/stdlib"
 	migrate "github.com/rubenv/sql-migrate"
+	"github.com/talktonpc/nakama/v3/server"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )

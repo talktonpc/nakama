@@ -17,7 +17,7 @@ go build && go install
 
 Otherwise you can install it using go mod as such:
 ```shell
-go get github.com/heroiclabs/nakama/console/protoc-gen-angular
+go get github.com/talktonpc/nakama/console/protoc-gen-angular
 ```
 
 #### Options

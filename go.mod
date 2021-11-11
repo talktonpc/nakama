@@ -1,4 +1,4 @@
-module github.com/heroiclabs/nakama/v3
+module github.com/talktonpc/nakama/v3
 
 go 1.17
 
@@ -12,7 +12,7 @@ require (
 	github.com/gorilla/mux v1.8.0
 	github.com/gorilla/websocket v1.4.2
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.6.0
-	github.com/heroiclabs/nakama-common v1.20.0
+	github.com/talktonpc/nakama-common v1.27.1
 	github.com/jackc/pgconn v1.10.0
 	github.com/jackc/pgerrcode v0.0.0-20201024163028-a0d42d470451
 	github.com/jackc/pgtype v1.8.1

@@ -26,7 +26,7 @@ import (
 	"github.com/gofrs/uuid"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 
-	"github.com/heroiclabs/nakama-common/runtime"
+	"github.com/talktonpc/nakama-common/runtime"
 )
 
 func TestEncode(t *testing.T) {

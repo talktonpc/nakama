@@ -31,11 +31,11 @@ import (
 	"time"
 
 	"github.com/gofrs/uuid"
-	"github.com/heroiclabs/nakama/v3/ga"
-	"github.com/heroiclabs/nakama/v3/migrate"
-	"github.com/heroiclabs/nakama/v3/server"
-	"github.com/heroiclabs/nakama/v3/social"
 	_ "github.com/jackc/pgx/v4/stdlib"
+	"github.com/talktonpc/nakama/v3/ga"
+	"github.com/talktonpc/nakama/v3/migrate"
+	"github.com/talktonpc/nakama/v3/server"
+	"github.com/talktonpc/nakama/v3/social"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"google.golang.org/protobuf/encoding/protojson"
@@ -44,8 +44,8 @@ import (
 const cookieFilename = ".cookie"
 
 var (
-	version  string = "3.0.0"
-	commitID string = "dev"
+	version  string = "3.0.1"
+	commitID string = "meta"
 
 	// Shared utility components.
 	jsonpbMarshaler = &protojson.MarshalOptions{

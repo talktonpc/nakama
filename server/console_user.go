@@ -19,13 +19,14 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"github.com/jackc/pgconn"
 	"net/http"
 	"regexp"
 	"unicode"
 
+	"github.com/jackc/pgconn"
+
 	"github.com/gofrs/uuid"
-	"github.com/heroiclabs/nakama/v3/console"
+	"github.com/talktonpc/nakama/v3/console"
 	"go.uber.org/zap"
 	"golang.org/x/crypto/bcrypt"
 	"google.golang.org/grpc/codes"

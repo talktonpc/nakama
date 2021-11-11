@@ -18,7 +18,7 @@ import (
 	"context"
 	"runtime"
 
-	"github.com/heroiclabs/nakama/v3/console"
+	"github.com/talktonpc/nakama/v3/console"
 	"go.uber.org/zap"
 )
 
