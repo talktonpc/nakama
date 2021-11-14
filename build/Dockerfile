@@ -26,17 +26,15 @@ ENV CGO_ENABLED 1
 
 RUN apt-get update && \
     apt-get -y upgrade && \
-    apt-get install -y --no-install-recommends ca-certificates gcc libc6-dev git && \
-    git config --global advice.detachedHead false && \
-    git clone --quiet --no-checkout https://github.com/talktonpc/nakama /go/build/nakama
+    apt-get install -y --no-install-recommends ca-certificates gcc libc6-dev
 
-WORKDIR /go/build/nakama
-RUN git checkout --quiet "$commit" && \
-    go build -o /go/build-out/nakama -trimpath -mod=vendor -gcflags "-trimpath $PWD" -asmflags "-trimpath $PWD" -ldflags "-s -w -X main.version=$version -X main.commitID=$commit"
+RUN mkdir -p /nakama/server/src
+COPY . /nakama/server/src/
+
+WORKDIR /nakama/server/src
+RUN go build -o /nakama/server/bin/nakama -trimpath -mod=vendor -gcflags "-trimpath $PWD" -asmflags "-trimpath $PWD" -ldflags "-s -w -X main.version=$version -X main.commitID=$commit"
 
 FROM debian:buster-slim
-
-MAINTAINER Heroic Labs <support@heroiclabs.com>
 
 ARG version
 
@@ -52,7 +50,9 @@ RUN mkdir -p /nakama/data/modules && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /nakama/
-COPY --from=builder "/go/build-out/nakama" /nakama/
+COPY --from=builder "/nakama/server/bin/nakama" /nakama/
+RUN rm -rf /nakama/server
+ 
 EXPOSE 7349 7350 7351
 
 ENTRYPOINT ["tini", "--", "/nakama/nakama"]

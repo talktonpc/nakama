@@ -26,17 +26,15 @@ ENV CGO_ENABLED 1
 
 RUN apt-get update && \
     apt-get -y upgrade && \
-    apt-get install -y --no-install-recommends ca-certificates gcc libc6-dev git && \
-    git config --global advice.detachedHead false && \
-    git clone --quiet --no-checkout https://github.com/talktonpc/nakama /go/build/nakama
+    apt-get install -y --no-install-recommends ca-certificates gcc libc6-dev
+
+ADD ../../nakama /go/build
 
 WORKDIR /go/build/nakama
-RUN git checkout --quiet "$commit" && \
-    go build -o /go/build-out/nakama -trimpath -mod=vendor -gcflags "all=-N -l" -ldflags "-X main.version=$version -X main.commitID=$commit"
+
+RUN   go build -o /go/build-out/nakama -trimpath -mod=vendor -gcflags "all=-N -l" -ldflags "-X main.version=$version -X main.commitID=$commit"
 
 FROM debian:buster-slim
-
-MAINTAINER Heroic Labs <support@heroiclabs.com>
 
 ARG version
 
