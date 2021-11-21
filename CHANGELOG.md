@@ -3,6 +3,11 @@ All notable changes to this project are documented below.
 
 The format is based on [keep a changelog](http://keepachangelog.com) and this project uses [semantic versioning](http://semver.org).
 
+## [3.9.0-meta] - 2021-11-21
+### Changed
+- Branding for MetaTop.
+
+
 ## [Unreleased]
 ### Fixed
 - Gracefully close Lua matches when call queue fills up.
