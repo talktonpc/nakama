@@ -44,7 +44,7 @@ import (
 const cookieFilename = ".cookie"
 
 var (
-	version  string = "3.0.1"
+	version  string = "3.9.0"
 	commitID string = "meta"
 
 	// Shared utility components.

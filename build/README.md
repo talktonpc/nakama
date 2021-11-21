@@ -31,15 +31,15 @@ These steps are run for each new release.
 
    ```
    git add CHANGELOG.md
-   git commit -m "Nakama 2.1.0 release."
-   git tag -a v2.1.0 -m "v2.1.0"
-   git push origin v2.1.0 master
+   git commit -m "Nakama 3.9.0-meta release."
+   git tag -a v3.9.0-meta -m "3.9.0-meta"
+   git push origin v3.9.0-meta developers/lonycell/master
    ```
 
 3. Execute the cross-compiled build helper.
 
    ```
-   xgo --targets=darwin/amd64,linux/amd64,linux/arm64,windows/amd64 --trimpath --ldflags "-s -w -X main.version=2.1.0 -X main.commitID=$(git rev-parse --short HEAD 2>/dev/null)" github.com/talktonpc/nakama
+   xgo --targets=darwin/amd64,linux/amd64,linux/arm64,windows/amd64 --trimpath --ldflags "-s -w -X main.version=3.9.0-meta -X main.commitID=$(git rev-parse --short HEAD 2>/dev/null)" github.com/talktonpc/nakama
    ```
 
    This will build binaries for all target platforms supported officially by Heroic Labs.
