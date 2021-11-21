@@ -168,6 +168,19 @@ To build the codebase and generate all sources follow these steps.
    go build -trimpath -mod=vendor
    ```
 
+5. Build for linux on windows PC.
+   ```shell
+   > set GOOS=linux
+   > set GOARCH=amd64
+   > go build -trimpath -mod=vendor 
+   ```
+
+6. Build docker image for linux container on windows PC.
+   ```shell
+   > docker build -f ./build/Dockerfile -t lonycell/nakama-server:v3.9.0-meta --build-arg version=3.9.0-mata .
+   > docker push lonycell/nakama-server:v3.9.0-meta
+   ```
+
 ### License
 
 This project is licensed under the [Apache-2 License](https://github.com/talktonpc/nakama/blob/master/LICENSE).

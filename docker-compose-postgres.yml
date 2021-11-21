@@ -16,7 +16,7 @@ services:
       - "8080:8080"
   nakama:
     container_name: nakama
-    image: heroiclabs/nakama:3.9.0
+    image: lonycell/nakama-server:v3.9.0-meta
     entrypoint:
       - "/bin/sh"
       - "-ecx"
