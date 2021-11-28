@@ -160,6 +160,8 @@ To build the codebase and generate all sources follow these steps.
 
    ```shell
    env PATH="$HOME/go/bin:$PATH" go generate -x ./...
+       or just
+   go generate -x ./...
    ```
 
 4. Build the codebase.
