@@ -1,10 +1,11 @@
-module github.com/talktonpc/nakama/v3
+module github.com/heroiclabs/nakama/v3
 
 go 1.17
 
 require (
-	github.com/blugelabs/bluge v0.1.7
-	github.com/blugelabs/query_string v0.2.0
+	github.com/blugelabs/bluge v0.1.8
+	github.com/blugelabs/bluge_segment_api v0.2.0
+	github.com/blugelabs/query_string v0.3.0
 	github.com/dop251/goja v0.0.0-20211022113120-dc8c55024d06
 	github.com/gofrs/uuid v4.0.0+incompatible
 	github.com/golang-jwt/jwt/v4 v4.1.0
@@ -12,13 +13,13 @@ require (
 	github.com/gorilla/mux v1.8.0
 	github.com/gorilla/websocket v1.4.2
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.6.0
+	github.com/heroiclabs/nakama-common v1.20.1-0.20211129154918-e47c06d002f1
 	github.com/jackc/pgconn v1.10.0
 	github.com/jackc/pgerrcode v0.0.0-20201024163028-a0d42d470451
 	github.com/jackc/pgtype v1.8.1
 	github.com/jackc/pgx/v4 v4.13.0
 	github.com/rubenv/sql-migrate v0.0.0-20210408115534-a32ed26c37ea
 	github.com/stretchr/testify v1.7.0
-	github.com/talktonpc/nakama-common v1.27.1
 	github.com/uber-go/tally/v4 v4.0.1
 	go.uber.org/atomic v1.9.0
 	go.uber.org/zap v1.19.1
@@ -41,7 +42,6 @@ require (
 	github.com/blevesearch/segment v0.9.0 // indirect
 	github.com/blevesearch/snowballstem v0.9.0 // indirect
 	github.com/blevesearch/vellum v1.0.7 // indirect
-	github.com/blugelabs/bluge_segment_api v0.2.0 // indirect
 	github.com/blugelabs/ice v0.2.0 // indirect
 	github.com/caio/go-tdigest v3.1.0+incompatible // indirect
 	github.com/cespare/xxhash/v2 v2.1.1 // indirect
@@ -59,7 +59,6 @@ require (
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgproto3/v2 v2.1.1 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20200714003250-2b9c44734f2b // indirect
-	github.com/karalabe/xgo v0.0.0-20191115072854-c5ccff8648a7 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.1 // indirect
 	github.com/mschoch/smat v0.2.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
