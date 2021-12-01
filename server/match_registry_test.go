@@ -24,7 +24,7 @@ import (
 
 	"github.com/blugelabs/bluge"
 	"github.com/gofrs/uuid"
-	"github.com/heroiclabs/nakama-common/runtime"
+	"github.com/talktonpc/nakama-common/runtime"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
