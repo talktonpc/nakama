@@ -22,14 +22,14 @@ services:
       - "-ecx"
       - >
           /nakama/nakama migrate up --database.address postgres:localdb@postgres:5432/nakama &&
-          exec /nakama/nakama --name nakama-metatop --database.address postgres:localdb@postgres:5432/nakama --logger.level DEBUG --session.token_expiry_sec 7200 --socket.server_key "metatop-choco-server" --runtime.js_entrypoint metatop/service.js
+          exec /nakama/nakama --name nakama-metatop --database.address postgres:localdb@postgres:5432/nakama --logger.level DEBUG --session.token_expiry_sec 7200 --socket.server_key "metatop-choco-server"
     restart: always
     links:
       - "postgres:db"
     depends_on:
       - postgres
     volumes:
-      - C:\works\servers\nakama-addon\metatop\:/nakama/data
+      - D:\works\servers\nakama-modules\:/nakama/data
     expose:
       - "7349"
       - "7350"
