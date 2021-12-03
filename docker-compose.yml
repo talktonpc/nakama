@@ -1,38 +1,39 @@
 version: '3'
 services:
-  cockroachdb:
-    image: cockroachdb/cockroach:latest-v20.2
-    command: start-single-node --insecure --store=attrs=ssd,path=/var/lib/cockroach/
-    restart: "no"
+  postgres:
+    container_name: postgres
+    image: postgres:9.6-alpine
+    environment:
+      - POSTGRES_DB=nakama
+      - POSTGRES_PASSWORD=localdb
     volumes:
-      - data:/var/lib/cockroach
+      - data:/var/lib/postgresql/data
     expose:
       - "8080"
-      - "26257"
+      - "5432"
     ports:
-      - "26257:26257"
+      - "5432:5432"
       - "8080:8080"
   nakama:
-    image: heroiclabs/nakama:3.9.0
+    container_name: nakama
+    image: lonycell/nakama-server:v3.9.0-meta
     entrypoint:
       - "/bin/sh"
       - "-ecx"
       - >
-          /nakama/nakama migrate up --database.address root@cockroachdb:26257 &&
-          exec /nakama/nakama --name nakama1 --database.address root@cockroachdb:26257 --logger.level DEBUG --session.token_expiry_sec 7200 --metrics.prometheus_port 9100
-    restart: "no"
+          /nakama/nakama migrate up --database.address postgres:localdb@postgres:5432/nakama &&
+          exec /nakama/nakama --name nakama-metatop --database.address postgres:localdb@postgres:5432/nakama --logger.level INFO --session.token_expiry_sec 7200 --socket.server_key "metatop-choco-server"
+    restart: always
     links:
-      - "cockroachdb:db"
+      - "postgres:db"
     depends_on:
-      - cockroachdb
-      - prometheus
+      - postgres
     volumes:
-      - ./:/nakama/data
+      - D:\works\servers\nakama-modules\data-manual\:/nakama/data
     expose:
       - "7349"
       - "7350"
       - "7351"
-      - "9100"
     ports:
       - "7349:7349"
       - "7350:7350"
@@ -42,29 +43,5 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-  prometheus:
-    image: prom/prometheus
-    entrypoint: /bin/sh -c
-    command: |
-      'sh -s <<EOF
-        cat > ./prometheus.yml <<EON
-      global:
-        scrape_interval:     15s
-        evaluation_interval: 15s
-
-      scrape_configs:
-        - job_name: prometheus
-          static_configs:
-          - targets: ['localhost:9090']
-
-        - job_name: nakama
-          metrics_path: /
-          static_configs:
-          - targets: ['nakama:9100']
-      EON
-      prometheus --config.file=./prometheus.yml
-      EOF'
-    ports:
-      - '9090:9090'
 volumes:
   data:
