@@ -16,20 +16,20 @@ services:
       - "8080:8080"
   nakama:
     container_name: nakama
-    image: lonycell/nakama-server:v3.9.0-meta
+    image: lonycell/nakama-server:v3.9.1-meta
     entrypoint:
       - "/bin/sh"
       - "-ecx"
       - >
           /nakama/nakama migrate up --database.address postgres:localdb@postgres:5432/nakama &&
-          exec /nakama/nakama --name nakama-metatop --database.address postgres:localdb@postgres:5432/nakama --logger.level INFO --session.token_expiry_sec 7200 --socket.server_key "metatop-choco-server"
+          exec /nakama/nakama --name nakama-metatop --database.address postgres:localdb@postgres:5432/nakama --logger.level DEBUG --session.token_expiry_sec 7200 --socket.server_key "metatop-choco-server"
     restart: always
     links:
       - "postgres:db"
     depends_on:
       - postgres
     volumes:
-      - D:\works\servers\nakama-modules\data-manual\:/nakama/data
+      - C:\works\meta\talktonpc\nakama-modules\data-manual\:/nakama/data
     expose:
       - "7349"
       - "7350"
