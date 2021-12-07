@@ -16,7 +16,7 @@ services:
       - "8080:8080"
   nakama:
     container_name: nakama
-    image: lonycell/nakama-server:v3.9.0-meta
+    image: lonycell/nakama-server:v3.9.1-meta
     entrypoint:
       - "/bin/sh"
       - "-ecx"
@@ -29,7 +29,7 @@ services:
     depends_on:
       - postgres
     volumes:
-      - D:\works\servers\nakama-modules\data-manual\:/nakama/data
+      - D:\works\servers\nakama\data\metatop\:/nakama/data
     expose:
       - "7349"
       - "7350"
