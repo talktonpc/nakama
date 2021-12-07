@@ -30,7 +30,7 @@ services:
     depends_on:
       - postgres
     volumes:
-      - D:\works\servers\nakama\data\metatop\:/nakama/data
+      - C:\works\meta\talktonpc\nakama\data\metatop\:/nakama/data
     expose:
       - "7349"
       - "7350"

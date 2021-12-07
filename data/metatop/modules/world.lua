@@ -33,9 +33,9 @@ commands[Operations.op_location] = function(data, state)
     local id = data.id
     local location = data
     if state.locations[id] ~= nil then
-        state.locations[id] = location.x
-        state.locations[id] = location.y
-        state.locations[id] = location.z
+        state.locations[id].x = location.x
+        state.locations[id].y = location.y
+        state.locations[id].z = location.z
     end
 end
 
