@@ -6,6 +6,7 @@ services:
     environment:
       - POSTGRES_DB=nakama
       - POSTGRES_PASSWORD=localdb
+      - TZ=Asia/Seoul
     volumes:
       - data:/var/lib/postgresql/data
     expose:
@@ -38,6 +39,8 @@ services:
       - "7349:7349"
       - "7350:7350"
       - "7351:7351"
+    environment:
+      - TZ=Asia/Seoul
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:7350/"]
       interval: 10s
