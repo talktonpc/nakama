@@ -97,15 +97,15 @@ end
 function world.match_leave(context, dispatcher, tick, state, presences)
     for _, presence in ipairs(presences) do
         local id = presence.user_id
-        local new_objects = {
-            {
-                collection = "player_data",
-                key = "location_" .. id,
-                user_id = id,
-                value = state.locations[id]
-            }
-        }
-        nk.storage_write(new_objects)
+        -- local new_objects = {
+        --     {
+        --         collection = "player_data",
+        --         key = "location_" .. id,
+        --         user_id = id,
+        --         value = state.locations[id]
+        --     }
+        -- }
+        -- nk.storage_write(new_objects)
 
         state.presences[id] = nil
         state.locations[id] = nil
