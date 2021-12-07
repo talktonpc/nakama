@@ -21,7 +21,7 @@ local Pose = {
     seat = 4
 }
 
-local SPAWN_POSITION = {-10.01, 0.0, -4.02}
+local SPAWN_POSITION = {-9.01, 0.0, -3.02}
 
 commands[Operations.op_state] = function(data, state)
 end
