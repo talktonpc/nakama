@@ -3,7 +3,7 @@ All notable changes to this project are documented below.
 
 The format is based on [keep a changelog](http://keepachangelog.com) and this project uses [semantic versioning](http://semver.org).
 
-## [3.9.0-meta] - 2021-11-21
+## [3.9.0-meta] - 2021-12-08
 ### Changed
 - Branding for MetaTop.
 
