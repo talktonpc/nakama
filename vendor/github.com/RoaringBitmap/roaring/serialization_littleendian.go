@@ -297,9 +297,8 @@ func (ra *roaringArray) frozenView(buf []byte) error {
 			iBitset++
 		case 2:
 			containers[i] = &arrays[iArray]
-			sz := int(counts[i])+1
-			arrays[iArray].content = arraysArena[:sz]
-			arraysArena = arraysArena[sz:]
+			arrays[iArray].content = arraysArena[:counts[i]+1]
+			arraysArena = arraysArena[counts[i]+1:]
 			iArray++
 		case 3:
 			containers[i] = &runs[iRun]
@@ -402,7 +401,7 @@ func (bm *Bitmap) FreezeTo(buf []byte) (int, error) {
 			copy(arraysArena, v.content)
 			arraysArena = arraysArena[len(v.content):]
 			elems := len(v.content)
-			counts[i] = uint16(elems-1)
+			counts[i] = uint16(elems)-1
 			types[i] = 2
 		case *runContainer16:
 			copy(runsArena, v.iv)

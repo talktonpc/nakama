@@ -31,15 +31,15 @@ These steps are run for each new release.
 
    ```
    git add CHANGELOG.md
-   git commit -m "Nakama 3.9.0-meta release."
-   git tag -a v3.9.0-meta -m "3.9.0-meta"
-   git push origin v3.9.0-meta developers/lonycell/master
+   git commit -m "Nakama 3.9.1-meta release."
+   git tag -a v3.9.1-meta -m "3.9.1-meta"
+   git push origin v3.9.1-meta developers/lonycell/master
    ```
 
 3. Execute the cross-compiled build helper.
 
    ```
-   xgo --targets=darwin/amd64,linux/amd64,linux/arm64,windows/amd64 --trimpath --ldflags "-s -w -X main.version=3.9.0-meta -X main.commitID=$(git rev-parse --short HEAD 2>/dev/null)" github.com/talktonpc/nakama
+   xgo --targets=darwin/amd64,linux/amd64,linux/arm64,windows/amd64 --trimpath --ldflags "-s -w -X main.version=3.9.1-meta -X main.commitID=$(git rev-parse --short HEAD 2>/dev/null)" github.com/talktonpc/nakama
    ```
 
    This will build binaries for all target platforms supported officially by Heroic Labs.
@@ -60,7 +60,7 @@ With the release generated we can create the official container image.
 
    ```
    cd build
-   docker build "$PWD" --file ./Dockerfile --build-arg commit="$(git rev-parse --short HEAD 2>/dev/null)" --build-arg version=2.1.0 -t heroiclabs/nakama:2.1.0
+   docker build "$PWD" --file ./Dockerfile --build-arg commit="$(git rev-parse --short HEAD 2>/dev/null)" --build-arg version=v3.9.1 -t lonycell/nakama:3.9.1
    ```
 
 2. Push the image to the container registry.
@@ -98,13 +98,13 @@ With the official release image generated we can create a container image to hel
 
    ```
    cd build/pluginbuilder
-   docker build "$PWD" --file ./Dockerfile --build-arg commit="$(git rev-parse --short HEAD 2>/dev/null)" --build-arg version=2.1.0 -t heroiclabs/nakama-pluginbuilder:2.1.0
+   docker build "$PWD" --file ./Dockerfile --build-arg commit="$(git rev-parse --short HEAD 2>/dev/null)" --build-arg version=v3.9.1-meta -t lonycell/nakama-pluginbuilder:v3.9.1-meta
    ```
 
 2. Push the image to the container registry.
 
    ```
-   docker tag <CONTAINERID> heroiclabs/nakama-pluginbuilder:latest
-   docker push heroiclabs/nakama-pluginbuilder:2.1.0
-   docker push heroiclabs/nakama-pluginbuilder:latest
+   docker tag <CONTAINERID> lonycell/nakama-pluginbuilder:latest
+   docker push lonycell/nakama-pluginbuilder:v3.9.1-meta
+   docker push lonycell/nakama-pluginbuilder:latest
    ```
