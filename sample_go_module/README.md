@@ -35,15 +35,15 @@ To setup your own project to build modules for the game server you can follow th
 2. Setup a folder for your own plugin code.
 
     ```bash
-    mkdir -p "$HOME/plugin_code"
-    cd "$HOME/plugin_code"
+    mkdir -p "$HOME/metatop-hello"
+    cd "$HOME/metatop-hello"
     ```
 
 3. Initialize the Go module for your plugin and add the nakama-common dependency.
 
     ```bash
-    go mod init "plugin_code"
-    go get -u "github.com/talktonpc/nakama-common@v1.4.0"
+    go mod init "metatop-hello"
+    go get -u "github.com/talktonpc/nakama-common@v1.20.a-metatop"
     ```
 
    ⚠️ __NOTE__: If you're working on Nakama's master branch drop the `@v1.4.0` from the above snippet.
@@ -59,13 +59,13 @@ In a regular development cycle you will often recompile your plugin code and rer
 1. Develop and compile your code.
 
     ```bash
-    go build -buildmode=plugin -trimpath -o ./plugin_code.so
+    go build -buildmode=plugin -trimpath -o ./metatop-hello.so
     ```
 
 2. Use `--runtime.path` flag when you start the Nakama server binary to load your built plugin. (Note: Also make sure you run the database).
 
     ```bash
-    ./nakama --runtime.path "$HOME/plugin_code"
+    ./nakama --runtime.path "$HOME/metatop-hello"
     ```
 
    __TIP__: You can either build and run Nakama from source or you can download a prebuilt binary for your platform [here](https://github.com/talktonpc/nakama/releases).
@@ -81,8 +81,8 @@ For Windows development and environments where you want to use our official Dock
 1. Use the Docker plugin helper container to compile your project (works for bash/PowerShell):
 
     ```bash
-    cd "$HOME/plugin_code" # Your project folder. See instructions above.
-    docker run --rm -w "/builder" -v "${PWD}:/builder" heroiclabs/nakama-pluginbuilder:2.11.1 build -buildmode=plugin -trimpath -o ./modules/plugin_code.so
+    cd "$HOME/metatop-hello" # Your project folder. See instructions above.
+    docker run --rm -w "/builder" -v "D:\works\servers\nakama-addons\hello\:/builder" heroiclabs/nakama-pluginbuilder:3.9.0 build -buildmode=plugin -trimpath -o ./modules/metatop-hello.so
     ```
 
    In the command above we bind-mount your current folder into the container and use the Go toolchain inside it to run the build. The output artifacts are written back into your host filesystem.

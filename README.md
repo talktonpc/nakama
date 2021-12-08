@@ -179,6 +179,13 @@ To build the codebase and generate all sources follow these steps.
    > go build -trimpath -mod=vendor 
    ```
 
+   reference!
+   ```shell
+   set GOARCH=amd64
+   set GOOS=linux
+   go tool dist install -v pkg/runtime
+   go install -v -a std
+   ```
 6. Build docker image for linux container on windows PC.
    ```shell
    > docker build -f ./build/Dockerfile -t lonycell/nakama-server:v3.9.0-meta --build-arg version=3.9.0-mata .
