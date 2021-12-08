@@ -188,8 +188,8 @@ To build the codebase and generate all sources follow these steps.
    ```
 6. Build docker image for linux container on windows PC.
    ```shell
-   > docker build -f ./build/Dockerfile -t lonycell/nakama-server:v3.9.0-meta --build-arg version=3.9.0-mata .
-   > docker push lonycell/nakama-server:v3.9.0-meta
+   > docker build -f ./build/Dockerfile -t lonycell/nakama-server:v3.9.1-meta --build-arg version=3.9.1-mata .
+   > docker push lonycell/nakama-server:v3.9.1-meta
    ```
 
 ### License
