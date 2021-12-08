@@ -9,7 +9,6 @@ require (
 	github.com/dop251/goja v0.0.0-20211207134806-acd374ca9c94
 	github.com/gofrs/uuid v4.2.0+incompatible
 	github.com/golang-jwt/jwt/v4 v4.2.0
-	github.com/golang/protobuf v1.5.2
 	github.com/gorilla/handlers v1.5.1
 	github.com/gorilla/mux v1.8.0
 	github.com/gorilla/websocket v1.4.2
@@ -20,7 +19,7 @@ require (
 	github.com/jackc/pgx/v4 v4.14.1
 	github.com/rubenv/sql-migrate v0.0.0-20211023115951-9f02b1e13857
 	github.com/stretchr/testify v1.7.0
-	github.com/talktonpc/nakama-common v1.27.1
+	github.com/talktonpc/nakama-common v1.27.2
 	github.com/uber-go/tally/v4 v4.1.1
 	go.uber.org/atomic v1.9.0
 	go.uber.org/zap v1.19.1
@@ -52,7 +51,9 @@ require (
 	github.com/felixge/httpsnoop v1.0.1 // indirect
 	github.com/go-sourcemap/sourcemap v2.1.3+incompatible // indirect
 	github.com/golang/glog v1.0.0 // indirect
+	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
+	github.com/heroiclabs/nakama-common v1.20.0 // indirect
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
 	github.com/jackc/pgio v1.0.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect

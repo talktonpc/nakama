@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// BUILD FOR METATOP v1.20.1 (2021-12-09)
+
 /*
 Package runtime is an API to interact with the embedded Runtime environment in Nakama.
 
@@ -110,6 +112,9 @@ const (
 
 	// The node ID where the current runtime context is executing.
 	RUNTIME_CTX_NODE = "node"
+
+	// Http headers. Only applicable to HTTP RPC requests.
+	RUNTIME_CTX_HEADERS = "headers"
 
 	// Query params that was passed through from HTTP request.
 	RUNTIME_CTX_QUERY_PARAMS = "query_params"
