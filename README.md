@@ -205,6 +205,18 @@ To build the codebase and generate all sources follow these steps.
    > ./nakama --name nakama-metatop --database.address postgres:localdb@localhost:15432/metatop --logger.level INFO --session.token_expiry_sec 7200 --socket.server_key "metatop-choco-server" --data_dir ../nakama-addon/metatop-hello
    ```
 
+   ```shell
+   > build plugin on docker based cross compiler
+   > docker run --rm -w "/builder" -v "D:\works\servers\nakama-addons\hello\:/builder" lonycell/nakama-pluginbuilder:v3.9.2-metatop build -buildmode=plugin -trimpath -o ./modules/metatop-hello.so
+   ```
+
+   ```shell
+   > build plugin on native compiler
+   > go build -buildmode=plugin -ldflags "-s -w -X main.version=v3.9.1-metatop" -trimpath -o ./modules/metatop-hello.so
+   ```
+
+
+
 ### License
 
 This project is licensed under the [Apache-2 License](https://github.com/talktonpc/nakama/blob/master/LICENSE).

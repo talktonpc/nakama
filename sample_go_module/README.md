@@ -43,7 +43,7 @@ To setup your own project to build modules for the game server you can follow th
 
     ```bash
     go mod init "metatop-hello"
-    go get -u "github.com/talktonpc/nakama-common@v1.20.0-metatop"
+    go get -u "github.com/talktonpc/nakama-common@v1.27.2"
     ```
 
    ⚠️ __NOTE__: If you're working on Nakama's master branch drop the `@v1.4.0` from the above snippet.
