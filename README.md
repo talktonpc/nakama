@@ -198,6 +198,13 @@ To build the codebase and generate all sources follow these steps.
    > docker push lonycell/nakama-pluginbuilder:v3.9.1-metatop
    ```
 
+### Sorcuts
+   ```shell
+   > go build -trimpath -mod=vendor -ldflags "-s -w -X main.version=v3.9.1-metatop" 
+   > ./nakama migrate up --database.address postgres:localdb@localhost:15432/metatop
+   > ./nakama --name nakama-metatop --database.address postgres:localdb@localhost:15432/metatop --logger.level INFO --session.token_expiry_sec 7200 --socket.server_key "metatop-choco-server" --data_dir ../nakama-addon/metatop-hello
+   ```
+
 ### License
 
 This project is licensed under the [Apache-2 License](https://github.com/talktonpc/nakama/blob/master/LICENSE).

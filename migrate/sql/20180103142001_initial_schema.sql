@@ -211,7 +211,7 @@ CREATE TABLE IF NOT EXISTS group_edge (
 -- ================================================================================================================
 -- Added for MetaTop extension (2021-12-09, lonycell)
 -- ================================================================================================================
-CREATE TABLE IF NOT EXISTS tbl_scences (
+CREATE TABLE IF NOT EXISTS tbl_scenes (
     PRIMARY KEY (id),
 
     id      INTEGER         NOT NULL UNIQUE CHECK (id >= 0),
@@ -232,4 +232,4 @@ DROP TABLE IF EXISTS
     group_edge, groups, user_tombstone, wallet_ledger, leaderboard_record, leaderboard, message, storage, notification, user_edge, user_device, users;
 
 DROP TABLE IF EXISTS
-    tbl_scences;
+    tbl_scenes;
