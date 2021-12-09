@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS users (
     display_name  VARCHAR(255),
     avatar_url    VARCHAR(512),
     -- https://tools.ietf.org/html/bcp47
-    lang_tag      VARCHAR(18)   NOT NULL DEFAULT 'en',
+    lang_tag      VARCHAR(18)   NOT NULL DEFAULT 'ko',
     location      VARCHAR(255), -- e.g. "San Francisco, CA"
     timezone      VARCHAR(255), -- e.g. "Pacific Time (US & Canada)"
     metadata      JSONB         NOT NULL DEFAULT '{}',
@@ -184,7 +184,7 @@ CREATE TABLE IF NOT EXISTS groups (
     description  VARCHAR(255),
     avatar_url   VARCHAR(512),
     -- https://tools.ietf.org/html/bcp47
-    lang_tag     VARCHAR(18)   NOT NULL DEFAULT 'en',
+    lang_tag     VARCHAR(18)   NOT NULL DEFAULT 'ko',
     metadata     JSONB         NOT NULL DEFAULT '{}',
     state        SMALLINT      NOT NULL DEFAULT 0 CHECK (state >= 0), -- open(0), closed(1)
     edge_count   INT           NOT NULL DEFAULT 0 CHECK (edge_count >= 1 AND edge_count <= max_count),
@@ -208,6 +208,28 @@ CREATE TABLE IF NOT EXISTS group_edge (
     UNIQUE (source_id, destination_id)
 );
 
+-- ================================================================================================================
+-- Added for MetaTop extension (2021-12-09, lonycell)
+-- ================================================================================================================
+CREATE TABLE IF NOT EXISTS tbl_scences (
+    PRIMARY KEY (id),
+
+    id      INTEGER         NOT NULL UNIQUE CHECK (id >= 0),
+    type    SMALLINT        NOT NULL DEFAULT 0 CHECK (type >= 0), -- city(0), building(1), room(2), interior(3)
+    name    VARCHAR(255)    NOT NULL UNIQUE,
+    title   VARCHAR(255)    NOT NULL,
+    address VARCHAR(255),
+    thumb   VARCHAR(255),
+    minimap VARCHAR(255),
+    scale   float(2) DEFAULT 1.0 CHECK (scale >= 0.0),
+    create_time TIMESTAMPTZ  NOT NULL DEFAULT now(),
+    update_time TIMESTAMPTZ  NOT NULL DEFAULT now()
+);
+-- ================================================================================================================
+
 -- +migrate Down
 DROP TABLE IF EXISTS
     group_edge, groups, user_tombstone, wallet_ledger, leaderboard_record, leaderboard, message, storage, notification, user_edge, user_device, users;
+
+DROP TABLE IF EXISTS
+    tbl_scences;

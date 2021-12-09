@@ -1,0 +1,19 @@
+version: '3'
+services:
+  metatop-postgres:
+    container_name: metatop-postgres
+    image: postgres:9.6-alpine
+    environment:
+      - POSTGRES_DB=metatop
+      - POSTGRES_PASSWORD=localdb
+      - TZ=Asia/Seoul
+    volumes:
+      - data:/var/lib/postgresql/data
+    expose:
+      - "8080"
+      - "5432"
+    ports:
+      - "15432:5432"
+      - "18080:8080"
+volumes:
+  data:

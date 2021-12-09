@@ -206,10 +206,17 @@ func Parse(args []string, tmpLogger *zap.Logger) {
 		if err != nil {
 			logger.Fatal("Failed to open database", zap.Error(err))
 		}
-		if _, err = db.Exec(fmt.Sprintf("CREATE DATABASE %s", dbname)); err != nil {
+
+		if _, err = db.Exec(fmt.Sprintf("CREATE DATABASE %s WITH TEMPLATE=template0 ENCODING='UTF8' LC_COLLATE='ko_KR.utf8' LC_CTYPE='ko_KR.utf8'", dbname)); err != nil {
 			db.Close()
 			logger.Fatal("Failed to create database", zap.Error(err))
 		}
+
+		if _, err = db.Exec(fmt.Sprintf("ALTER DATABASE %s SET timezone TO 'Asia/Seoul';", dbname)); err != nil {
+			db.Close()
+			logger.Fatal("Failed to create database", zap.Error(err))
+		}
+
 		db.Close()
 		parsedURL.Path = fmt.Sprintf("/%s", dbname)
 		db, err = sql.Open("pgx", parsedURL.String())
