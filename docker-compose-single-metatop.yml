@@ -1,0 +1,31 @@
+version: '3'
+services:
+  metatop-nakama:
+    container_name: metatop-nakama
+    image: lonycell/nakama-server:v3.9.1-metatop
+    entrypoint:
+      - "/bin/sh"
+      - "-ecx"
+      - >
+          /nakama/nakama migrate up --database.address postgres:localdb@host.docker.internal:15432/metatop &&
+          exec /nakama/nakama --name nakama-metatop --database.address postgres:localdb@host.docker.internal:15432/metatop --logger.level INFO --session.token_expiry_sec 7200 --socket.server_key "metatop-choco-server"
+    restart: always
+    volumes:
+      - D:\works\servers\nakama-modules\data\:/nakama/data
+    expose:
+      - "7349"
+      - "7350"
+      - "7351"
+    ports:
+      - "7349:7349"
+      - "7350:7350"
+      - "7351:7351"
+    environment:
+      - TZ=Asia/Seoul
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://host.docker.internal:7350/"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  data:
