@@ -13,6 +13,7 @@ import (
 	"io"
 	"net/http"
 
+	"github.com/golang/protobuf/ptypes/empty"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/utilities"
 	"github.com/talktonpc/nakama-common/api"
@@ -22,7 +23,6 @@ import (
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 // Suppress "imported and not used" errors
@@ -504,7 +504,7 @@ func local_request_Console_DeleteGroupUser_0(ctx context.Context, marshaler runt
 }
 
 func request_Console_DeleteStorage_0(ctx context.Context, marshaler runtime.Marshaler, client ConsoleClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq emptypb.Empty
+	var protoReq empty.Empty
 	var metadata runtime.ServerMetadata
 
 	msg, err := client.DeleteStorage(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -513,7 +513,7 @@ func request_Console_DeleteStorage_0(ctx context.Context, marshaler runtime.Mars
 }
 
 func local_request_Console_DeleteStorage_0(ctx context.Context, marshaler runtime.Marshaler, server ConsoleServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq emptypb.Empty
+	var protoReq empty.Empty
 	var metadata runtime.ServerMetadata
 
 	msg, err := server.DeleteStorage(ctx, &protoReq)
@@ -744,7 +744,7 @@ func local_request_Console_DeleteStorageObject_1(ctx context.Context, marshaler 
 }
 
 func request_Console_DeleteAccounts_0(ctx context.Context, marshaler runtime.Marshaler, client ConsoleClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq emptypb.Empty
+	var protoReq empty.Empty
 	var metadata runtime.ServerMetadata
 
 	msg, err := client.DeleteAccounts(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -753,7 +753,7 @@ func request_Console_DeleteAccounts_0(ctx context.Context, marshaler runtime.Mar
 }
 
 func local_request_Console_DeleteAccounts_0(ctx context.Context, marshaler runtime.Marshaler, server ConsoleServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq emptypb.Empty
+	var protoReq empty.Empty
 	var metadata runtime.ServerMetadata
 
 	msg, err := server.DeleteAccounts(ctx, &protoReq)
@@ -1098,7 +1098,7 @@ func local_request_Console_GetAccount_0(ctx context.Context, marshaler runtime.M
 }
 
 func request_Console_GetConfig_0(ctx context.Context, marshaler runtime.Marshaler, client ConsoleClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq emptypb.Empty
+	var protoReq empty.Empty
 	var metadata runtime.ServerMetadata
 
 	msg, err := client.GetConfig(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -1107,7 +1107,7 @@ func request_Console_GetConfig_0(ctx context.Context, marshaler runtime.Marshale
 }
 
 func local_request_Console_GetConfig_0(ctx context.Context, marshaler runtime.Marshaler, server ConsoleServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq emptypb.Empty
+	var protoReq empty.Empty
 	var metadata runtime.ServerMetadata
 
 	msg, err := server.GetConfig(ctx, &protoReq)
@@ -1324,7 +1324,7 @@ func local_request_Console_GetMatchState_0(ctx context.Context, marshaler runtim
 }
 
 func request_Console_GetRuntime_0(ctx context.Context, marshaler runtime.Marshaler, client ConsoleClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq emptypb.Empty
+	var protoReq empty.Empty
 	var metadata runtime.ServerMetadata
 
 	msg, err := client.GetRuntime(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -1333,7 +1333,7 @@ func request_Console_GetRuntime_0(ctx context.Context, marshaler runtime.Marshal
 }
 
 func local_request_Console_GetRuntime_0(ctx context.Context, marshaler runtime.Marshaler, server ConsoleServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq emptypb.Empty
+	var protoReq empty.Empty
 	var metadata runtime.ServerMetadata
 
 	msg, err := server.GetRuntime(ctx, &protoReq)
@@ -1342,7 +1342,7 @@ func local_request_Console_GetRuntime_0(ctx context.Context, marshaler runtime.M
 }
 
 func request_Console_GetStatus_0(ctx context.Context, marshaler runtime.Marshaler, client ConsoleClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq emptypb.Empty
+	var protoReq empty.Empty
 	var metadata runtime.ServerMetadata
 
 	msg, err := client.GetStatus(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -1351,7 +1351,7 @@ func request_Console_GetStatus_0(ctx context.Context, marshaler runtime.Marshale
 }
 
 func local_request_Console_GetStatus_0(ctx context.Context, marshaler runtime.Marshaler, server ConsoleServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq emptypb.Empty
+	var protoReq empty.Empty
 	var metadata runtime.ServerMetadata
 
 	msg, err := server.GetStatus(ctx, &protoReq)
@@ -1522,7 +1522,7 @@ func local_request_Console_GetWalletLedger_0(ctx context.Context, marshaler runt
 }
 
 func request_Console_ListApiEndpoints_0(ctx context.Context, marshaler runtime.Marshaler, client ConsoleClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq emptypb.Empty
+	var protoReq empty.Empty
 	var metadata runtime.ServerMetadata
 
 	msg, err := client.ListApiEndpoints(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -1531,7 +1531,7 @@ func request_Console_ListApiEndpoints_0(ctx context.Context, marshaler runtime.M
 }
 
 func local_request_Console_ListApiEndpoints_0(ctx context.Context, marshaler runtime.Marshaler, server ConsoleServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq emptypb.Empty
+	var protoReq empty.Empty
 	var metadata runtime.ServerMetadata
 
 	msg, err := server.ListApiEndpoints(ctx, &protoReq)
@@ -1610,7 +1610,7 @@ func local_request_Console_ListLeaderboardRecords_0(ctx context.Context, marshal
 }
 
 func request_Console_ListLeaderboards_0(ctx context.Context, marshaler runtime.Marshaler, client ConsoleClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq emptypb.Empty
+	var protoReq empty.Empty
 	var metadata runtime.ServerMetadata
 
 	msg, err := client.ListLeaderboards(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -1619,7 +1619,7 @@ func request_Console_ListLeaderboards_0(ctx context.Context, marshaler runtime.M
 }
 
 func local_request_Console_ListLeaderboards_0(ctx context.Context, marshaler runtime.Marshaler, server ConsoleServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq emptypb.Empty
+	var protoReq empty.Empty
 	var metadata runtime.ServerMetadata
 
 	msg, err := server.ListLeaderboards(ctx, &protoReq)
@@ -1664,7 +1664,7 @@ func local_request_Console_ListStorage_0(ctx context.Context, marshaler runtime.
 }
 
 func request_Console_ListStorageCollections_0(ctx context.Context, marshaler runtime.Marshaler, client ConsoleClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq emptypb.Empty
+	var protoReq empty.Empty
 	var metadata runtime.ServerMetadata
 
 	msg, err := client.ListStorageCollections(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -1673,7 +1673,7 @@ func request_Console_ListStorageCollections_0(ctx context.Context, marshaler run
 }
 
 func local_request_Console_ListStorageCollections_0(ctx context.Context, marshaler runtime.Marshaler, server ConsoleServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq emptypb.Empty
+	var protoReq empty.Empty
 	var metadata runtime.ServerMetadata
 
 	msg, err := server.ListStorageCollections(ctx, &protoReq)
@@ -1790,7 +1790,7 @@ func local_request_Console_ListPurchases_0(ctx context.Context, marshaler runtim
 }
 
 func request_Console_ListUsers_0(ctx context.Context, marshaler runtime.Marshaler, client ConsoleClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq emptypb.Empty
+	var protoReq empty.Empty
 	var metadata runtime.ServerMetadata
 
 	msg, err := client.ListUsers(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -1799,7 +1799,7 @@ func request_Console_ListUsers_0(ctx context.Context, marshaler runtime.Marshale
 }
 
 func local_request_Console_ListUsers_0(ctx context.Context, marshaler runtime.Marshaler, server ConsoleServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq emptypb.Empty
+	var protoReq empty.Empty
 	var metadata runtime.ServerMetadata
 
 	msg, err := server.ListUsers(ctx, &protoReq)

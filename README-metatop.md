@@ -2,12 +2,11 @@
 ========================================================================================
 # 0. __Sortcuts__
 
-### 📌 Run DB(postgreSQL) server ! (on linux or windows)
-⚠️ NOTE: port number - 15432 (not 5432) in the .yml file.
+### 📌 Run DB(postgreSQL) server ! (on linux or windows) ⚠️ NOTE: port number - 15432 (not default 5432) in the .yml file.
 ```shell
 > docker-compose -f ./docker-compose-single-postgres.yml up -d
-
 ```
+
 
 
 ### 📌 For server ! (on linux)
@@ -30,6 +29,8 @@ run server
 ```shell
 > docker-compose -f .\docker-compose-single-metatop.yml up
 ```
+admin page
+[http://127.0.0.1:7351](http://127.0.0.1:7351)
 
 ### 📌 For plugins In Docker build helper ! (on windows)
 ```shell
@@ -101,7 +102,7 @@ To build the codebase and generate all sources follow these steps.
 
 6. Build docker image for linux container on windows PC.
    ```shell
-   > docker build -f ./build/Dockerfile -t lonycell/v3.9.1-metatop --build-arg version=v3.9.1-metatop .
+   > docker build -f ./build/Dockerfile -t lonycell/nakama-server:v3.9.1-metatop --build-arg version=v3.9.1-metatop .
    > docker push lonycell/nakama-server:v3.9.1-metatop
    ```
 ---

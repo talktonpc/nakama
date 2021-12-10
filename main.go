@@ -44,8 +44,8 @@ import (
 const cookieFilename = ".cookie"
 
 var (
-	version  string = "3.9.0"
-	commitID string = "meta"
+	version  string = "3.9.1"
+	commitID string = "metatop"
 
 	// Shared utility components.
 	jsonpbMarshaler = &protojson.MarshalOptions{

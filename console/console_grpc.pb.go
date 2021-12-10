@@ -4,11 +4,11 @@ package console
 
 import (
 	context "context"
+	empty "github.com/golang/protobuf/ptypes/empty"
 	api "github.com/talktonpc/nakama-common/api"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -23,39 +23,39 @@ type ConsoleClient interface {
 	// Authenticate a console user with username and password.
 	Authenticate(ctx context.Context, in *AuthenticateRequest, opts ...grpc.CallOption) (*ConsoleSession, error)
 	// Add a new console user.
-	AddUser(ctx context.Context, in *AddUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	AddUser(ctx context.Context, in *AddUserRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Ban a user.
-	BanAccount(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	BanAccount(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*empty.Empty, error)
 	// API Explorer - call an endpoint
 	CallApiEndpoint(ctx context.Context, in *CallApiEndpointRequest, opts ...grpc.CallOption) (*CallApiEndpointResponse, error)
 	// API Explorer - call a custom RPC endpoint
 	CallRpcEndpoint(ctx context.Context, in *CallApiEndpointRequest, opts ...grpc.CallOption) (*CallApiEndpointResponse, error)
 	// Delete all information stored for a user account.
-	DeleteAccount(ctx context.Context, in *AccountDeleteRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteAccount(ctx context.Context, in *AccountDeleteRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Delete the friend relationship between two users.
-	DeleteFriend(ctx context.Context, in *DeleteFriendRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteFriend(ctx context.Context, in *DeleteFriendRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Remove a user from a group.
-	DeleteGroupUser(ctx context.Context, in *DeleteGroupUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteGroupUser(ctx context.Context, in *DeleteGroupUserRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Delete all storage data.
-	DeleteStorage(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteStorage(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Delete a storage object.
-	DeleteStorageObject(ctx context.Context, in *DeleteStorageObjectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteStorageObject(ctx context.Context, in *DeleteStorageObjectRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Delete (non-recorded) all user accounts.
-	DeleteAccounts(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteAccounts(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Delete leaderboard
-	DeleteLeaderboard(ctx context.Context, in *LeaderboardRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteLeaderboard(ctx context.Context, in *LeaderboardRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Delete leaderboard record
-	DeleteLeaderboardRecord(ctx context.Context, in *DeleteLeaderboardRecordRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteLeaderboardRecord(ctx context.Context, in *DeleteLeaderboardRecordRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Delete console user.
-	DeleteUser(ctx context.Context, in *Username, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteUser(ctx context.Context, in *Username, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Delete a wallet ledger item.
-	DeleteWalletLedger(ctx context.Context, in *DeleteWalletLedgerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteWalletLedger(ctx context.Context, in *DeleteWalletLedgerRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Export all information stored about a user account.
 	ExportAccount(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*AccountExport, error)
 	// Get detailed account information for a single user.
 	GetAccount(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*Account, error)
 	// Get server config and configuration warnings.
-	GetConfig(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Config, error)
+	GetConfig(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*Config, error)
 	// Get a user's list of friend relationships.
 	GetFriends(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*api.FriendList, error)
 	// Get a list of groups the user is a member of.
@@ -65,23 +65,23 @@ type ConsoleClient interface {
 	// Get current state of a running match
 	GetMatchState(ctx context.Context, in *MatchStateRequest, opts ...grpc.CallOption) (*MatchState, error)
 	// Get runtime info
-	GetRuntime(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*RuntimeInfo, error)
+	GetRuntime(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*RuntimeInfo, error)
 	// Get current status data for all nodes.
-	GetStatus(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*StatusList, error)
+	GetStatus(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*StatusList, error)
 	// Get a storage object.
 	GetStorage(ctx context.Context, in *api.ReadStorageObjectId, opts ...grpc.CallOption) (*api.StorageObject, error)
 	// Get a list of the user's wallet transactions.
 	GetWalletLedger(ctx context.Context, in *GetWalletLedgerRequest, opts ...grpc.CallOption) (*WalletLedgerList, error)
 	// API Explorer - list all endpoints
-	ListApiEndpoints(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ApiEndpointList, error)
+	ListApiEndpoints(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*ApiEndpointList, error)
 	// List leaderboard records.
 	ListLeaderboardRecords(ctx context.Context, in *api.ListLeaderboardRecordsRequest, opts ...grpc.CallOption) (*api.LeaderboardRecordList, error)
 	// List leaderboards
-	ListLeaderboards(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*LeaderboardList, error)
+	ListLeaderboards(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*LeaderboardList, error)
 	// List (and optionally filter) storage data.
 	ListStorage(ctx context.Context, in *ListStorageRequest, opts ...grpc.CallOption) (*StorageList, error)
 	//List storage collections
-	ListStorageCollections(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*StorageCollectionsList, error)
+	ListStorageCollections(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*StorageCollectionsList, error)
 	// List (and optionally filter) accounts.
 	ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (*AccountList, error)
 	// List ongoing matches
@@ -89,29 +89,29 @@ type ConsoleClient interface {
 	// List validated purchases
 	ListPurchases(ctx context.Context, in *ListPurchasesRequest, opts ...grpc.CallOption) (*api.PurchaseList, error)
 	// List (and optionally filter) users.
-	ListUsers(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*UserList, error)
+	ListUsers(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*UserList, error)
 	// Unban a user.
-	UnbanAccount(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UnbanAccount(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Unlink the custom ID from a user account.
-	UnlinkCustom(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UnlinkCustom(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Unlink the device ID from a user account.
-	UnlinkDevice(ctx context.Context, in *UnlinkDeviceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UnlinkDevice(ctx context.Context, in *UnlinkDeviceRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Unlink the email from a user account.
-	UnlinkEmail(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UnlinkEmail(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Unlink the Apple ID from a user account.
-	UnlinkApple(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UnlinkApple(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Unlink the Facebook ID from a user account.
-	UnlinkFacebook(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UnlinkFacebook(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Unlink the Facebook Instant Game ID from a user account.
-	UnlinkFacebookInstantGame(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UnlinkFacebookInstantGame(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Unlink the Game Center ID from a user account.
-	UnlinkGameCenter(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UnlinkGameCenter(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Unlink the Google ID from a user account.
-	UnlinkGoogle(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UnlinkGoogle(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Unlink the Steam ID from a user account.
-	UnlinkSteam(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UnlinkSteam(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Update one or more fields on a user account.
-	UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Write a new storage object or replace an existing one.
 	WriteStorageObject(ctx context.Context, in *WriteStorageObjectRequest, opts ...grpc.CallOption) (*api.StorageObjectAck, error)
 }
@@ -133,8 +133,8 @@ func (c *consoleClient) Authenticate(ctx context.Context, in *AuthenticateReques
 	return out, nil
 }
 
-func (c *consoleClient) AddUser(ctx context.Context, in *AddUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *consoleClient) AddUser(ctx context.Context, in *AddUserRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/AddUser", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -142,8 +142,8 @@ func (c *consoleClient) AddUser(ctx context.Context, in *AddUserRequest, opts ..
 	return out, nil
 }
 
-func (c *consoleClient) BanAccount(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *consoleClient) BanAccount(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/BanAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -169,8 +169,8 @@ func (c *consoleClient) CallRpcEndpoint(ctx context.Context, in *CallApiEndpoint
 	return out, nil
 }
 
-func (c *consoleClient) DeleteAccount(ctx context.Context, in *AccountDeleteRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *consoleClient) DeleteAccount(ctx context.Context, in *AccountDeleteRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/DeleteAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -178,8 +178,8 @@ func (c *consoleClient) DeleteAccount(ctx context.Context, in *AccountDeleteRequ
 	return out, nil
 }
 
-func (c *consoleClient) DeleteFriend(ctx context.Context, in *DeleteFriendRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *consoleClient) DeleteFriend(ctx context.Context, in *DeleteFriendRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/DeleteFriend", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -187,8 +187,8 @@ func (c *consoleClient) DeleteFriend(ctx context.Context, in *DeleteFriendReques
 	return out, nil
 }
 
-func (c *consoleClient) DeleteGroupUser(ctx context.Context, in *DeleteGroupUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *consoleClient) DeleteGroupUser(ctx context.Context, in *DeleteGroupUserRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/DeleteGroupUser", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -196,8 +196,8 @@ func (c *consoleClient) DeleteGroupUser(ctx context.Context, in *DeleteGroupUser
 	return out, nil
 }
 
-func (c *consoleClient) DeleteStorage(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *consoleClient) DeleteStorage(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/DeleteStorage", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -205,8 +205,8 @@ func (c *consoleClient) DeleteStorage(ctx context.Context, in *emptypb.Empty, op
 	return out, nil
 }
 
-func (c *consoleClient) DeleteStorageObject(ctx context.Context, in *DeleteStorageObjectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *consoleClient) DeleteStorageObject(ctx context.Context, in *DeleteStorageObjectRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/DeleteStorageObject", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -214,8 +214,8 @@ func (c *consoleClient) DeleteStorageObject(ctx context.Context, in *DeleteStora
 	return out, nil
 }
 
-func (c *consoleClient) DeleteAccounts(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *consoleClient) DeleteAccounts(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/DeleteAccounts", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -223,8 +223,8 @@ func (c *consoleClient) DeleteAccounts(ctx context.Context, in *emptypb.Empty, o
 	return out, nil
 }
 
-func (c *consoleClient) DeleteLeaderboard(ctx context.Context, in *LeaderboardRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *consoleClient) DeleteLeaderboard(ctx context.Context, in *LeaderboardRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/DeleteLeaderboard", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -232,8 +232,8 @@ func (c *consoleClient) DeleteLeaderboard(ctx context.Context, in *LeaderboardRe
 	return out, nil
 }
 
-func (c *consoleClient) DeleteLeaderboardRecord(ctx context.Context, in *DeleteLeaderboardRecordRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *consoleClient) DeleteLeaderboardRecord(ctx context.Context, in *DeleteLeaderboardRecordRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/DeleteLeaderboardRecord", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -241,8 +241,8 @@ func (c *consoleClient) DeleteLeaderboardRecord(ctx context.Context, in *DeleteL
 	return out, nil
 }
 
-func (c *consoleClient) DeleteUser(ctx context.Context, in *Username, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *consoleClient) DeleteUser(ctx context.Context, in *Username, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/DeleteUser", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -250,8 +250,8 @@ func (c *consoleClient) DeleteUser(ctx context.Context, in *Username, opts ...gr
 	return out, nil
 }
 
-func (c *consoleClient) DeleteWalletLedger(ctx context.Context, in *DeleteWalletLedgerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *consoleClient) DeleteWalletLedger(ctx context.Context, in *DeleteWalletLedgerRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/DeleteWalletLedger", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -277,7 +277,7 @@ func (c *consoleClient) GetAccount(ctx context.Context, in *AccountId, opts ...g
 	return out, nil
 }
 
-func (c *consoleClient) GetConfig(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Config, error) {
+func (c *consoleClient) GetConfig(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*Config, error) {
 	out := new(Config)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/GetConfig", in, out, opts...)
 	if err != nil {
@@ -322,7 +322,7 @@ func (c *consoleClient) GetMatchState(ctx context.Context, in *MatchStateRequest
 	return out, nil
 }
 
-func (c *consoleClient) GetRuntime(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*RuntimeInfo, error) {
+func (c *consoleClient) GetRuntime(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*RuntimeInfo, error) {
 	out := new(RuntimeInfo)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/GetRuntime", in, out, opts...)
 	if err != nil {
@@ -331,7 +331,7 @@ func (c *consoleClient) GetRuntime(ctx context.Context, in *emptypb.Empty, opts 
 	return out, nil
 }
 
-func (c *consoleClient) GetStatus(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*StatusList, error) {
+func (c *consoleClient) GetStatus(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*StatusList, error) {
 	out := new(StatusList)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/GetStatus", in, out, opts...)
 	if err != nil {
@@ -358,7 +358,7 @@ func (c *consoleClient) GetWalletLedger(ctx context.Context, in *GetWalletLedger
 	return out, nil
 }
 
-func (c *consoleClient) ListApiEndpoints(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ApiEndpointList, error) {
+func (c *consoleClient) ListApiEndpoints(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*ApiEndpointList, error) {
 	out := new(ApiEndpointList)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/ListApiEndpoints", in, out, opts...)
 	if err != nil {
@@ -376,7 +376,7 @@ func (c *consoleClient) ListLeaderboardRecords(ctx context.Context, in *api.List
 	return out, nil
 }
 
-func (c *consoleClient) ListLeaderboards(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*LeaderboardList, error) {
+func (c *consoleClient) ListLeaderboards(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*LeaderboardList, error) {
 	out := new(LeaderboardList)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/ListLeaderboards", in, out, opts...)
 	if err != nil {
@@ -394,7 +394,7 @@ func (c *consoleClient) ListStorage(ctx context.Context, in *ListStorageRequest,
 	return out, nil
 }
 
-func (c *consoleClient) ListStorageCollections(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*StorageCollectionsList, error) {
+func (c *consoleClient) ListStorageCollections(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*StorageCollectionsList, error) {
 	out := new(StorageCollectionsList)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/ListStorageCollections", in, out, opts...)
 	if err != nil {
@@ -430,7 +430,7 @@ func (c *consoleClient) ListPurchases(ctx context.Context, in *ListPurchasesRequ
 	return out, nil
 }
 
-func (c *consoleClient) ListUsers(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*UserList, error) {
+func (c *consoleClient) ListUsers(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*UserList, error) {
 	out := new(UserList)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/ListUsers", in, out, opts...)
 	if err != nil {
@@ -439,8 +439,8 @@ func (c *consoleClient) ListUsers(ctx context.Context, in *emptypb.Empty, opts .
 	return out, nil
 }
 
-func (c *consoleClient) UnbanAccount(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *consoleClient) UnbanAccount(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/UnbanAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -448,8 +448,8 @@ func (c *consoleClient) UnbanAccount(ctx context.Context, in *AccountId, opts ..
 	return out, nil
 }
 
-func (c *consoleClient) UnlinkCustom(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *consoleClient) UnlinkCustom(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/UnlinkCustom", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -457,8 +457,8 @@ func (c *consoleClient) UnlinkCustom(ctx context.Context, in *AccountId, opts ..
 	return out, nil
 }
 
-func (c *consoleClient) UnlinkDevice(ctx context.Context, in *UnlinkDeviceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *consoleClient) UnlinkDevice(ctx context.Context, in *UnlinkDeviceRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/UnlinkDevice", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -466,8 +466,8 @@ func (c *consoleClient) UnlinkDevice(ctx context.Context, in *UnlinkDeviceReques
 	return out, nil
 }
 
-func (c *consoleClient) UnlinkEmail(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *consoleClient) UnlinkEmail(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/UnlinkEmail", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -475,8 +475,8 @@ func (c *consoleClient) UnlinkEmail(ctx context.Context, in *AccountId, opts ...
 	return out, nil
 }
 
-func (c *consoleClient) UnlinkApple(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *consoleClient) UnlinkApple(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/UnlinkApple", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -484,8 +484,8 @@ func (c *consoleClient) UnlinkApple(ctx context.Context, in *AccountId, opts ...
 	return out, nil
 }
 
-func (c *consoleClient) UnlinkFacebook(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *consoleClient) UnlinkFacebook(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/UnlinkFacebook", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -493,8 +493,8 @@ func (c *consoleClient) UnlinkFacebook(ctx context.Context, in *AccountId, opts 
 	return out, nil
 }
 
-func (c *consoleClient) UnlinkFacebookInstantGame(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *consoleClient) UnlinkFacebookInstantGame(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/UnlinkFacebookInstantGame", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -502,8 +502,8 @@ func (c *consoleClient) UnlinkFacebookInstantGame(ctx context.Context, in *Accou
 	return out, nil
 }
 
-func (c *consoleClient) UnlinkGameCenter(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *consoleClient) UnlinkGameCenter(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/UnlinkGameCenter", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -511,8 +511,8 @@ func (c *consoleClient) UnlinkGameCenter(ctx context.Context, in *AccountId, opt
 	return out, nil
 }
 
-func (c *consoleClient) UnlinkGoogle(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *consoleClient) UnlinkGoogle(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/UnlinkGoogle", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -520,8 +520,8 @@ func (c *consoleClient) UnlinkGoogle(ctx context.Context, in *AccountId, opts ..
 	return out, nil
 }
 
-func (c *consoleClient) UnlinkSteam(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *consoleClient) UnlinkSteam(ctx context.Context, in *AccountId, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/UnlinkSteam", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -529,8 +529,8 @@ func (c *consoleClient) UnlinkSteam(ctx context.Context, in *AccountId, opts ...
 	return out, nil
 }
 
-func (c *consoleClient) UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *consoleClient) UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/nakama.console.Console/UpdateAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -554,39 +554,39 @@ type ConsoleServer interface {
 	// Authenticate a console user with username and password.
 	Authenticate(context.Context, *AuthenticateRequest) (*ConsoleSession, error)
 	// Add a new console user.
-	AddUser(context.Context, *AddUserRequest) (*emptypb.Empty, error)
+	AddUser(context.Context, *AddUserRequest) (*empty.Empty, error)
 	// Ban a user.
-	BanAccount(context.Context, *AccountId) (*emptypb.Empty, error)
+	BanAccount(context.Context, *AccountId) (*empty.Empty, error)
 	// API Explorer - call an endpoint
 	CallApiEndpoint(context.Context, *CallApiEndpointRequest) (*CallApiEndpointResponse, error)
 	// API Explorer - call a custom RPC endpoint
 	CallRpcEndpoint(context.Context, *CallApiEndpointRequest) (*CallApiEndpointResponse, error)
 	// Delete all information stored for a user account.
-	DeleteAccount(context.Context, *AccountDeleteRequest) (*emptypb.Empty, error)
+	DeleteAccount(context.Context, *AccountDeleteRequest) (*empty.Empty, error)
 	// Delete the friend relationship between two users.
-	DeleteFriend(context.Context, *DeleteFriendRequest) (*emptypb.Empty, error)
+	DeleteFriend(context.Context, *DeleteFriendRequest) (*empty.Empty, error)
 	// Remove a user from a group.
-	DeleteGroupUser(context.Context, *DeleteGroupUserRequest) (*emptypb.Empty, error)
+	DeleteGroupUser(context.Context, *DeleteGroupUserRequest) (*empty.Empty, error)
 	// Delete all storage data.
-	DeleteStorage(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
+	DeleteStorage(context.Context, *empty.Empty) (*empty.Empty, error)
 	// Delete a storage object.
-	DeleteStorageObject(context.Context, *DeleteStorageObjectRequest) (*emptypb.Empty, error)
+	DeleteStorageObject(context.Context, *DeleteStorageObjectRequest) (*empty.Empty, error)
 	// Delete (non-recorded) all user accounts.
-	DeleteAccounts(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
+	DeleteAccounts(context.Context, *empty.Empty) (*empty.Empty, error)
 	// Delete leaderboard
-	DeleteLeaderboard(context.Context, *LeaderboardRequest) (*emptypb.Empty, error)
+	DeleteLeaderboard(context.Context, *LeaderboardRequest) (*empty.Empty, error)
 	// Delete leaderboard record
-	DeleteLeaderboardRecord(context.Context, *DeleteLeaderboardRecordRequest) (*emptypb.Empty, error)
+	DeleteLeaderboardRecord(context.Context, *DeleteLeaderboardRecordRequest) (*empty.Empty, error)
 	// Delete console user.
-	DeleteUser(context.Context, *Username) (*emptypb.Empty, error)
+	DeleteUser(context.Context, *Username) (*empty.Empty, error)
 	// Delete a wallet ledger item.
-	DeleteWalletLedger(context.Context, *DeleteWalletLedgerRequest) (*emptypb.Empty, error)
+	DeleteWalletLedger(context.Context, *DeleteWalletLedgerRequest) (*empty.Empty, error)
 	// Export all information stored about a user account.
 	ExportAccount(context.Context, *AccountId) (*AccountExport, error)
 	// Get detailed account information for a single user.
 	GetAccount(context.Context, *AccountId) (*Account, error)
 	// Get server config and configuration warnings.
-	GetConfig(context.Context, *emptypb.Empty) (*Config, error)
+	GetConfig(context.Context, *empty.Empty) (*Config, error)
 	// Get a user's list of friend relationships.
 	GetFriends(context.Context, *AccountId) (*api.FriendList, error)
 	// Get a list of groups the user is a member of.
@@ -596,23 +596,23 @@ type ConsoleServer interface {
 	// Get current state of a running match
 	GetMatchState(context.Context, *MatchStateRequest) (*MatchState, error)
 	// Get runtime info
-	GetRuntime(context.Context, *emptypb.Empty) (*RuntimeInfo, error)
+	GetRuntime(context.Context, *empty.Empty) (*RuntimeInfo, error)
 	// Get current status data for all nodes.
-	GetStatus(context.Context, *emptypb.Empty) (*StatusList, error)
+	GetStatus(context.Context, *empty.Empty) (*StatusList, error)
 	// Get a storage object.
 	GetStorage(context.Context, *api.ReadStorageObjectId) (*api.StorageObject, error)
 	// Get a list of the user's wallet transactions.
 	GetWalletLedger(context.Context, *GetWalletLedgerRequest) (*WalletLedgerList, error)
 	// API Explorer - list all endpoints
-	ListApiEndpoints(context.Context, *emptypb.Empty) (*ApiEndpointList, error)
+	ListApiEndpoints(context.Context, *empty.Empty) (*ApiEndpointList, error)
 	// List leaderboard records.
 	ListLeaderboardRecords(context.Context, *api.ListLeaderboardRecordsRequest) (*api.LeaderboardRecordList, error)
 	// List leaderboards
-	ListLeaderboards(context.Context, *emptypb.Empty) (*LeaderboardList, error)
+	ListLeaderboards(context.Context, *empty.Empty) (*LeaderboardList, error)
 	// List (and optionally filter) storage data.
 	ListStorage(context.Context, *ListStorageRequest) (*StorageList, error)
 	//List storage collections
-	ListStorageCollections(context.Context, *emptypb.Empty) (*StorageCollectionsList, error)
+	ListStorageCollections(context.Context, *empty.Empty) (*StorageCollectionsList, error)
 	// List (and optionally filter) accounts.
 	ListAccounts(context.Context, *ListAccountsRequest) (*AccountList, error)
 	// List ongoing matches
@@ -620,29 +620,29 @@ type ConsoleServer interface {
 	// List validated purchases
 	ListPurchases(context.Context, *ListPurchasesRequest) (*api.PurchaseList, error)
 	// List (and optionally filter) users.
-	ListUsers(context.Context, *emptypb.Empty) (*UserList, error)
+	ListUsers(context.Context, *empty.Empty) (*UserList, error)
 	// Unban a user.
-	UnbanAccount(context.Context, *AccountId) (*emptypb.Empty, error)
+	UnbanAccount(context.Context, *AccountId) (*empty.Empty, error)
 	// Unlink the custom ID from a user account.
-	UnlinkCustom(context.Context, *AccountId) (*emptypb.Empty, error)
+	UnlinkCustom(context.Context, *AccountId) (*empty.Empty, error)
 	// Unlink the device ID from a user account.
-	UnlinkDevice(context.Context, *UnlinkDeviceRequest) (*emptypb.Empty, error)
+	UnlinkDevice(context.Context, *UnlinkDeviceRequest) (*empty.Empty, error)
 	// Unlink the email from a user account.
-	UnlinkEmail(context.Context, *AccountId) (*emptypb.Empty, error)
+	UnlinkEmail(context.Context, *AccountId) (*empty.Empty, error)
 	// Unlink the Apple ID from a user account.
-	UnlinkApple(context.Context, *AccountId) (*emptypb.Empty, error)
+	UnlinkApple(context.Context, *AccountId) (*empty.Empty, error)
 	// Unlink the Facebook ID from a user account.
-	UnlinkFacebook(context.Context, *AccountId) (*emptypb.Empty, error)
+	UnlinkFacebook(context.Context, *AccountId) (*empty.Empty, error)
 	// Unlink the Facebook Instant Game ID from a user account.
-	UnlinkFacebookInstantGame(context.Context, *AccountId) (*emptypb.Empty, error)
+	UnlinkFacebookInstantGame(context.Context, *AccountId) (*empty.Empty, error)
 	// Unlink the Game Center ID from a user account.
-	UnlinkGameCenter(context.Context, *AccountId) (*emptypb.Empty, error)
+	UnlinkGameCenter(context.Context, *AccountId) (*empty.Empty, error)
 	// Unlink the Google ID from a user account.
-	UnlinkGoogle(context.Context, *AccountId) (*emptypb.Empty, error)
+	UnlinkGoogle(context.Context, *AccountId) (*empty.Empty, error)
 	// Unlink the Steam ID from a user account.
-	UnlinkSteam(context.Context, *AccountId) (*emptypb.Empty, error)
+	UnlinkSteam(context.Context, *AccountId) (*empty.Empty, error)
 	// Update one or more fields on a user account.
-	UpdateAccount(context.Context, *UpdateAccountRequest) (*emptypb.Empty, error)
+	UpdateAccount(context.Context, *UpdateAccountRequest) (*empty.Empty, error)
 	// Write a new storage object or replace an existing one.
 	WriteStorageObject(context.Context, *WriteStorageObjectRequest) (*api.StorageObjectAck, error)
 	mustEmbedUnimplementedConsoleServer()
@@ -655,10 +655,10 @@ type UnimplementedConsoleServer struct {
 func (UnimplementedConsoleServer) Authenticate(context.Context, *AuthenticateRequest) (*ConsoleSession, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Authenticate not implemented")
 }
-func (UnimplementedConsoleServer) AddUser(context.Context, *AddUserRequest) (*emptypb.Empty, error) {
+func (UnimplementedConsoleServer) AddUser(context.Context, *AddUserRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddUser not implemented")
 }
-func (UnimplementedConsoleServer) BanAccount(context.Context, *AccountId) (*emptypb.Empty, error) {
+func (UnimplementedConsoleServer) BanAccount(context.Context, *AccountId) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BanAccount not implemented")
 }
 func (UnimplementedConsoleServer) CallApiEndpoint(context.Context, *CallApiEndpointRequest) (*CallApiEndpointResponse, error) {
@@ -667,34 +667,34 @@ func (UnimplementedConsoleServer) CallApiEndpoint(context.Context, *CallApiEndpo
 func (UnimplementedConsoleServer) CallRpcEndpoint(context.Context, *CallApiEndpointRequest) (*CallApiEndpointResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CallRpcEndpoint not implemented")
 }
-func (UnimplementedConsoleServer) DeleteAccount(context.Context, *AccountDeleteRequest) (*emptypb.Empty, error) {
+func (UnimplementedConsoleServer) DeleteAccount(context.Context, *AccountDeleteRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccount not implemented")
 }
-func (UnimplementedConsoleServer) DeleteFriend(context.Context, *DeleteFriendRequest) (*emptypb.Empty, error) {
+func (UnimplementedConsoleServer) DeleteFriend(context.Context, *DeleteFriendRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteFriend not implemented")
 }
-func (UnimplementedConsoleServer) DeleteGroupUser(context.Context, *DeleteGroupUserRequest) (*emptypb.Empty, error) {
+func (UnimplementedConsoleServer) DeleteGroupUser(context.Context, *DeleteGroupUserRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteGroupUser not implemented")
 }
-func (UnimplementedConsoleServer) DeleteStorage(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
+func (UnimplementedConsoleServer) DeleteStorage(context.Context, *empty.Empty) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteStorage not implemented")
 }
-func (UnimplementedConsoleServer) DeleteStorageObject(context.Context, *DeleteStorageObjectRequest) (*emptypb.Empty, error) {
+func (UnimplementedConsoleServer) DeleteStorageObject(context.Context, *DeleteStorageObjectRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteStorageObject not implemented")
 }
-func (UnimplementedConsoleServer) DeleteAccounts(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
+func (UnimplementedConsoleServer) DeleteAccounts(context.Context, *empty.Empty) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccounts not implemented")
 }
-func (UnimplementedConsoleServer) DeleteLeaderboard(context.Context, *LeaderboardRequest) (*emptypb.Empty, error) {
+func (UnimplementedConsoleServer) DeleteLeaderboard(context.Context, *LeaderboardRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteLeaderboard not implemented")
 }
-func (UnimplementedConsoleServer) DeleteLeaderboardRecord(context.Context, *DeleteLeaderboardRecordRequest) (*emptypb.Empty, error) {
+func (UnimplementedConsoleServer) DeleteLeaderboardRecord(context.Context, *DeleteLeaderboardRecordRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteLeaderboardRecord not implemented")
 }
-func (UnimplementedConsoleServer) DeleteUser(context.Context, *Username) (*emptypb.Empty, error) {
+func (UnimplementedConsoleServer) DeleteUser(context.Context, *Username) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteUser not implemented")
 }
-func (UnimplementedConsoleServer) DeleteWalletLedger(context.Context, *DeleteWalletLedgerRequest) (*emptypb.Empty, error) {
+func (UnimplementedConsoleServer) DeleteWalletLedger(context.Context, *DeleteWalletLedgerRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteWalletLedger not implemented")
 }
 func (UnimplementedConsoleServer) ExportAccount(context.Context, *AccountId) (*AccountExport, error) {
@@ -703,7 +703,7 @@ func (UnimplementedConsoleServer) ExportAccount(context.Context, *AccountId) (*A
 func (UnimplementedConsoleServer) GetAccount(context.Context, *AccountId) (*Account, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccount not implemented")
 }
-func (UnimplementedConsoleServer) GetConfig(context.Context, *emptypb.Empty) (*Config, error) {
+func (UnimplementedConsoleServer) GetConfig(context.Context, *empty.Empty) (*Config, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetConfig not implemented")
 }
 func (UnimplementedConsoleServer) GetFriends(context.Context, *AccountId) (*api.FriendList, error) {
@@ -718,10 +718,10 @@ func (UnimplementedConsoleServer) GetLeaderboard(context.Context, *LeaderboardRe
 func (UnimplementedConsoleServer) GetMatchState(context.Context, *MatchStateRequest) (*MatchState, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMatchState not implemented")
 }
-func (UnimplementedConsoleServer) GetRuntime(context.Context, *emptypb.Empty) (*RuntimeInfo, error) {
+func (UnimplementedConsoleServer) GetRuntime(context.Context, *empty.Empty) (*RuntimeInfo, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRuntime not implemented")
 }
-func (UnimplementedConsoleServer) GetStatus(context.Context, *emptypb.Empty) (*StatusList, error) {
+func (UnimplementedConsoleServer) GetStatus(context.Context, *empty.Empty) (*StatusList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetStatus not implemented")
 }
 func (UnimplementedConsoleServer) GetStorage(context.Context, *api.ReadStorageObjectId) (*api.StorageObject, error) {
@@ -730,19 +730,19 @@ func (UnimplementedConsoleServer) GetStorage(context.Context, *api.ReadStorageOb
 func (UnimplementedConsoleServer) GetWalletLedger(context.Context, *GetWalletLedgerRequest) (*WalletLedgerList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetWalletLedger not implemented")
 }
-func (UnimplementedConsoleServer) ListApiEndpoints(context.Context, *emptypb.Empty) (*ApiEndpointList, error) {
+func (UnimplementedConsoleServer) ListApiEndpoints(context.Context, *empty.Empty) (*ApiEndpointList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListApiEndpoints not implemented")
 }
 func (UnimplementedConsoleServer) ListLeaderboardRecords(context.Context, *api.ListLeaderboardRecordsRequest) (*api.LeaderboardRecordList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListLeaderboardRecords not implemented")
 }
-func (UnimplementedConsoleServer) ListLeaderboards(context.Context, *emptypb.Empty) (*LeaderboardList, error) {
+func (UnimplementedConsoleServer) ListLeaderboards(context.Context, *empty.Empty) (*LeaderboardList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListLeaderboards not implemented")
 }
 func (UnimplementedConsoleServer) ListStorage(context.Context, *ListStorageRequest) (*StorageList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListStorage not implemented")
 }
-func (UnimplementedConsoleServer) ListStorageCollections(context.Context, *emptypb.Empty) (*StorageCollectionsList, error) {
+func (UnimplementedConsoleServer) ListStorageCollections(context.Context, *empty.Empty) (*StorageCollectionsList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListStorageCollections not implemented")
 }
 func (UnimplementedConsoleServer) ListAccounts(context.Context, *ListAccountsRequest) (*AccountList, error) {
@@ -754,40 +754,40 @@ func (UnimplementedConsoleServer) ListMatches(context.Context, *api.ListMatchesR
 func (UnimplementedConsoleServer) ListPurchases(context.Context, *ListPurchasesRequest) (*api.PurchaseList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPurchases not implemented")
 }
-func (UnimplementedConsoleServer) ListUsers(context.Context, *emptypb.Empty) (*UserList, error) {
+func (UnimplementedConsoleServer) ListUsers(context.Context, *empty.Empty) (*UserList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUsers not implemented")
 }
-func (UnimplementedConsoleServer) UnbanAccount(context.Context, *AccountId) (*emptypb.Empty, error) {
+func (UnimplementedConsoleServer) UnbanAccount(context.Context, *AccountId) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UnbanAccount not implemented")
 }
-func (UnimplementedConsoleServer) UnlinkCustom(context.Context, *AccountId) (*emptypb.Empty, error) {
+func (UnimplementedConsoleServer) UnlinkCustom(context.Context, *AccountId) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UnlinkCustom not implemented")
 }
-func (UnimplementedConsoleServer) UnlinkDevice(context.Context, *UnlinkDeviceRequest) (*emptypb.Empty, error) {
+func (UnimplementedConsoleServer) UnlinkDevice(context.Context, *UnlinkDeviceRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UnlinkDevice not implemented")
 }
-func (UnimplementedConsoleServer) UnlinkEmail(context.Context, *AccountId) (*emptypb.Empty, error) {
+func (UnimplementedConsoleServer) UnlinkEmail(context.Context, *AccountId) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UnlinkEmail not implemented")
 }
-func (UnimplementedConsoleServer) UnlinkApple(context.Context, *AccountId) (*emptypb.Empty, error) {
+func (UnimplementedConsoleServer) UnlinkApple(context.Context, *AccountId) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UnlinkApple not implemented")
 }
-func (UnimplementedConsoleServer) UnlinkFacebook(context.Context, *AccountId) (*emptypb.Empty, error) {
+func (UnimplementedConsoleServer) UnlinkFacebook(context.Context, *AccountId) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UnlinkFacebook not implemented")
 }
-func (UnimplementedConsoleServer) UnlinkFacebookInstantGame(context.Context, *AccountId) (*emptypb.Empty, error) {
+func (UnimplementedConsoleServer) UnlinkFacebookInstantGame(context.Context, *AccountId) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UnlinkFacebookInstantGame not implemented")
 }
-func (UnimplementedConsoleServer) UnlinkGameCenter(context.Context, *AccountId) (*emptypb.Empty, error) {
+func (UnimplementedConsoleServer) UnlinkGameCenter(context.Context, *AccountId) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UnlinkGameCenter not implemented")
 }
-func (UnimplementedConsoleServer) UnlinkGoogle(context.Context, *AccountId) (*emptypb.Empty, error) {
+func (UnimplementedConsoleServer) UnlinkGoogle(context.Context, *AccountId) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UnlinkGoogle not implemented")
 }
-func (UnimplementedConsoleServer) UnlinkSteam(context.Context, *AccountId) (*emptypb.Empty, error) {
+func (UnimplementedConsoleServer) UnlinkSteam(context.Context, *AccountId) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UnlinkSteam not implemented")
 }
-func (UnimplementedConsoleServer) UpdateAccount(context.Context, *UpdateAccountRequest) (*emptypb.Empty, error) {
+func (UnimplementedConsoleServer) UpdateAccount(context.Context, *UpdateAccountRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccount not implemented")
 }
 func (UnimplementedConsoleServer) WriteStorageObject(context.Context, *WriteStorageObjectRequest) (*api.StorageObjectAck, error) {
@@ -951,7 +951,7 @@ func _Console_DeleteGroupUser_Handler(srv interface{}, ctx context.Context, dec 
 }
 
 func _Console_DeleteStorage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(empty.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -963,7 +963,7 @@ func _Console_DeleteStorage_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: "/nakama.console.Console/DeleteStorage",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConsoleServer).DeleteStorage(ctx, req.(*emptypb.Empty))
+		return srv.(ConsoleServer).DeleteStorage(ctx, req.(*empty.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -987,7 +987,7 @@ func _Console_DeleteStorageObject_Handler(srv interface{}, ctx context.Context, 
 }
 
 func _Console_DeleteAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(empty.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -999,7 +999,7 @@ func _Console_DeleteAccounts_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: "/nakama.console.Console/DeleteAccounts",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConsoleServer).DeleteAccounts(ctx, req.(*emptypb.Empty))
+		return srv.(ConsoleServer).DeleteAccounts(ctx, req.(*empty.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1113,7 +1113,7 @@ func _Console_GetAccount_Handler(srv interface{}, ctx context.Context, dec func(
 }
 
 func _Console_GetConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(empty.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1125,7 +1125,7 @@ func _Console_GetConfig_Handler(srv interface{}, ctx context.Context, dec func(i
 		FullMethod: "/nakama.console.Console/GetConfig",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConsoleServer).GetConfig(ctx, req.(*emptypb.Empty))
+		return srv.(ConsoleServer).GetConfig(ctx, req.(*empty.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1203,7 +1203,7 @@ func _Console_GetMatchState_Handler(srv interface{}, ctx context.Context, dec fu
 }
 
 func _Console_GetRuntime_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(empty.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1215,13 +1215,13 @@ func _Console_GetRuntime_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: "/nakama.console.Console/GetRuntime",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConsoleServer).GetRuntime(ctx, req.(*emptypb.Empty))
+		return srv.(ConsoleServer).GetRuntime(ctx, req.(*empty.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Console_GetStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(empty.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1233,7 +1233,7 @@ func _Console_GetStatus_Handler(srv interface{}, ctx context.Context, dec func(i
 		FullMethod: "/nakama.console.Console/GetStatus",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConsoleServer).GetStatus(ctx, req.(*emptypb.Empty))
+		return srv.(ConsoleServer).GetStatus(ctx, req.(*empty.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1275,7 +1275,7 @@ func _Console_GetWalletLedger_Handler(srv interface{}, ctx context.Context, dec 
 }
 
 func _Console_ListApiEndpoints_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(empty.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1287,7 +1287,7 @@ func _Console_ListApiEndpoints_Handler(srv interface{}, ctx context.Context, dec
 		FullMethod: "/nakama.console.Console/ListApiEndpoints",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConsoleServer).ListApiEndpoints(ctx, req.(*emptypb.Empty))
+		return srv.(ConsoleServer).ListApiEndpoints(ctx, req.(*empty.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1311,7 +1311,7 @@ func _Console_ListLeaderboardRecords_Handler(srv interface{}, ctx context.Contex
 }
 
 func _Console_ListLeaderboards_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(empty.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1323,7 +1323,7 @@ func _Console_ListLeaderboards_Handler(srv interface{}, ctx context.Context, dec
 		FullMethod: "/nakama.console.Console/ListLeaderboards",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConsoleServer).ListLeaderboards(ctx, req.(*emptypb.Empty))
+		return srv.(ConsoleServer).ListLeaderboards(ctx, req.(*empty.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1347,7 +1347,7 @@ func _Console_ListStorage_Handler(srv interface{}, ctx context.Context, dec func
 }
 
 func _Console_ListStorageCollections_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(empty.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1359,7 +1359,7 @@ func _Console_ListStorageCollections_Handler(srv interface{}, ctx context.Contex
 		FullMethod: "/nakama.console.Console/ListStorageCollections",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConsoleServer).ListStorageCollections(ctx, req.(*emptypb.Empty))
+		return srv.(ConsoleServer).ListStorageCollections(ctx, req.(*empty.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1419,7 +1419,7 @@ func _Console_ListPurchases_Handler(srv interface{}, ctx context.Context, dec fu
 }
 
 func _Console_ListUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(empty.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1431,7 +1431,7 @@ func _Console_ListUsers_Handler(srv interface{}, ctx context.Context, dec func(i
 		FullMethod: "/nakama.console.Console/ListUsers",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConsoleServer).ListUsers(ctx, req.(*emptypb.Empty))
+		return srv.(ConsoleServer).ListUsers(ctx, req.(*empty.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
