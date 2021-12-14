@@ -26,8 +26,8 @@ import (
 	"time"
 
 	"github.com/gofrs/uuid"
-	"github.com/heroiclabs/nakama-common/api"
-	"github.com/heroiclabs/nakama/v3/internal/cronexpr"
+	"github.com/talktonpc/nakama-common/api"
+	"github.com/talktonpc/nakama/v3/internal/cronexpr"
 	"github.com/jackc/pgconn"
 	"github.com/jackc/pgtype"
 	"go.uber.org/zap"
