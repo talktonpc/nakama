@@ -11,15 +11,18 @@ The format is based on [keep a changelog](http://keepachangelog.com) and this pr
 ## [Unreleased]
 ### Added
 - Add ctx field to access http request headers in the runtimes.
+- New JS runtime stringToBinary and binaryToString functions.
 
 ### Fixed
 - Gracefully close Lua matches when call queue fills up.
 - Better handling for Lua runtime wallet update operation errors.
 - Fix handling of leaderboard record writes that do not need to update the database.
 - Fix parsing edge case in TypeScript/JavaScript runtime storage delete operations.
+- Better handling of leaderboard and tournament score submissions that result in no changes.
 
 ### Changed
 - Set JS runtime custom error message as the returned payload message in RPC requests.
+- JS runtime match data changed to Uint8Array.
 
 ## [3.9.0] - 2021-10-29
 ### Added
