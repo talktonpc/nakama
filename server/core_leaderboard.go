@@ -26,9 +26,10 @@ import (
 	"time"
 
 	"github.com/gofrs/uuid"
-	"github.com/jackc/pgtype"
 	"github.com/talktonpc/nakama-common/api"
 	"github.com/talktonpc/nakama/v3/internal/cronexpr"
+	"github.com/jackc/pgconn"
+	"github.com/jackc/pgtype"
 	"go.uber.org/zap"
 	"google.golang.org/protobuf/types/known/timestamppb"
 	"google.golang.org/protobuf/types/known/wrapperspb"
@@ -478,7 +479,8 @@ func LeaderboardRecordWrite(ctx context.Context, logger *zap.Logger, db *sql.DB,
 	var dbUpdateTime pgtype.Timestamptz
 
 	if err := db.QueryRowContext(ctx, query, params...).Scan(&dbUsername, &dbScore, &dbSubscore, &dbNumScore, &dbMaxNumScore, &dbMetadata, &dbCreateTime, &dbUpdateTime); err != nil {
-		if err != sql.ErrNoRows {
+		var pgErr *pgconn.PgError
+		if err != sql.ErrNoRows && !(errors.As(err, &pgErr) && pgErr.Code == dbErrorUniqueViolation && strings.Contains(pgErr.Message, "leaderboard_record_pkey")) {
 			logger.Error("Error writing leaderboard record", zap.Error(err))
 			return nil, err
 		}
