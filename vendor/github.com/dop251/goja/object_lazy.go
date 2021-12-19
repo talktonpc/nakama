@@ -223,22 +223,10 @@ func (o *lazyObject) preventExtensions(throw bool) bool {
 	return obj.preventExtensions(throw)
 }
 
-func (o *lazyObject) iterateStringKeys() iterNextFunc {
+func (o *lazyObject) enumerateOwnKeys() iterNextFunc {
 	obj := o.create(o.val)
 	o.val.self = obj
-	return obj.iterateStringKeys()
-}
-
-func (o *lazyObject) iterateSymbols() iterNextFunc {
-	obj := o.create(o.val)
-	o.val.self = obj
-	return obj.iterateSymbols()
-}
-
-func (o *lazyObject) iterateKeys() iterNextFunc {
-	obj := o.create(o.val)
-	o.val.self = obj
-	return obj.iterateKeys()
+	return obj.enumerateOwnKeys()
 }
 
 func (o *lazyObject) export(ctx *objectExportCtx) interface{} {
@@ -259,22 +247,22 @@ func (o *lazyObject) equal(other objectImpl) bool {
 	return obj.equal(other)
 }
 
-func (o *lazyObject) stringKeys(all bool, accum []Value) []Value {
+func (o *lazyObject) ownKeys(all bool, accum []Value) []Value {
 	obj := o.create(o.val)
 	o.val.self = obj
-	return obj.stringKeys(all, accum)
+	return obj.ownKeys(all, accum)
 }
 
-func (o *lazyObject) symbols(all bool, accum []Value) []Value {
+func (o *lazyObject) ownSymbols(all bool, accum []Value) []Value {
 	obj := o.create(o.val)
 	o.val.self = obj
-	return obj.symbols(all, accum)
+	return obj.ownSymbols(all, accum)
 }
 
-func (o *lazyObject) keys(all bool, accum []Value) []Value {
+func (o *lazyObject) ownPropertyKeys(all bool, accum []Value) []Value {
 	obj := o.create(o.val)
 	o.val.self = obj
-	return obj.keys(all, accum)
+	return obj.ownPropertyKeys(all, accum)
 }
 
 func (o *lazyObject) setProto(proto *Object, throw bool) bool {

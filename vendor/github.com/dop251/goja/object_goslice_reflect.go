@@ -1,8 +1,6 @@
 package goja
 
 import (
-	"math"
-	"math/bits"
 	"reflect"
 	"strconv"
 
@@ -140,11 +138,8 @@ func (o *objectGoSliceReflect) shrink(size int) {
 	o.updateLen()
 }
 
-func (o *objectGoSliceReflect) putLength(v uint32, throw bool) bool {
-	if bits.UintSize == 32 && v > math.MaxInt32 {
-		panic(rangeError("Integer value overflows 32-bit int"))
-	}
-	newLen := int(v)
+func (o *objectGoSliceReflect) putLength(v Value, throw bool) bool {
+	newLen := toIntStrict(toLength(v))
 	curLen := o.value.Len()
 	if newLen > curLen {
 		o.grow(newLen)
@@ -184,7 +179,7 @@ func (o *objectGoSliceReflect) setOwnStr(name unistring.String, val Value, throw
 		o.putIdx(idx, val, throw)
 	} else {
 		if name == "length" {
-			return o.putLength(o.val.runtime.toLengthUint32(val), throw)
+			return o.putLength(val, throw)
 		}
 		if res, ok := o._setForeignStr(name, nil, val, o.val, throw); !ok {
 			o.val.runtime.typeErrorResult(throw, "Can't set property '%s' on Go slice", name)
@@ -243,9 +238,6 @@ func (o *objectGoSliceReflect) defineOwnPropertyStr(name unistring.String, descr
 		o.putIdx(idx, val, throw)
 		return true
 	}
-	if name == "length" {
-		return o.val.runtime.defineArrayLength(&o.lengthProp, descr, o.putLength, throw)
-	}
 	o.val.runtime.typeErrorResult(throw, "Cannot define property '%s' on a Go slice", name)
 	return false
 }
@@ -296,21 +288,21 @@ func (i *gosliceReflectPropIter) next() (propIterItem, iterNextFunc) {
 	if i.idx < i.limit && i.idx < i.o.value.Len() {
 		name := strconv.Itoa(i.idx)
 		i.idx++
-		return propIterItem{name: asciiString(name), enumerable: _ENUM_TRUE}, i.next
+		return propIterItem{name: unistring.String(name), enumerable: _ENUM_TRUE}, i.next
 	}
 
-	return i.o.objectGoReflect.iterateStringKeys()()
+	return i.o.objectGoReflect.enumerateOwnKeys()()
 }
 
-func (o *objectGoSliceReflect) stringKeys(all bool, accum []Value) []Value {
+func (o *objectGoSliceReflect) ownKeys(all bool, accum []Value) []Value {
 	for i := 0; i < o.value.Len(); i++ {
 		accum = append(accum, asciiString(strconv.Itoa(i)))
 	}
 
-	return o.objectGoReflect.stringKeys(all, accum)
+	return o.objectGoReflect.ownKeys(all, accum)
 }
 
-func (o *objectGoSliceReflect) iterateStringKeys() iterNextFunc {
+func (o *objectGoSliceReflect) enumerateOwnKeys() iterNextFunc {
 	return (&gosliceReflectPropIter{
 		o:     o,
 		limit: o.value.Len(),

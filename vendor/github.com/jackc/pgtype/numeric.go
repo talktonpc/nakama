@@ -18,12 +18,6 @@ const nbase = 10000
 const (
 	pgNumericNaN     = 0x00000000c0000000
 	pgNumericNaNSign = 0xc000
-
-	pgNumericPosInf     = 0x00000000d0000000
-	pgNumericPosInfSign = 0xd000
-
-	pgNumericNegInf     = 0x00000000f0000000
-	pgNumericNegInfSign = 0xf000
 )
 
 var big0 *big.Int = big.NewInt(0)
@@ -55,11 +49,10 @@ var bigNBaseX3 *big.Int = big.NewInt(nbase * nbase * nbase)
 var bigNBaseX4 *big.Int = big.NewInt(nbase * nbase * nbase * nbase)
 
 type Numeric struct {
-	Int              *big.Int
-	Exp              int32
-	Status           Status
-	NaN              bool
-	InfinityModifier InfinityModifier
+	Int    *big.Int
+	Exp    int32
+	Status Status
+	NaN    bool
 }
 
 func (dst *Numeric) Set(src interface{}) error {
@@ -80,12 +73,6 @@ func (dst *Numeric) Set(src interface{}) error {
 		if math.IsNaN(float64(value)) {
 			*dst = Numeric{Status: Present, NaN: true}
 			return nil
-		} else if math.IsInf(float64(value), 1) {
-			*dst = Numeric{Status: Present, InfinityModifier: Infinity}
-			return nil
-		} else if math.IsInf(float64(value), -1) {
-			*dst = Numeric{Status: Present, InfinityModifier: NegativeInfinity}
-			return nil
 		}
 		num, exp, err := parseNumericString(strconv.FormatFloat(float64(value), 'f', -1, 64))
 		if err != nil {
@@ -95,12 +82,6 @@ func (dst *Numeric) Set(src interface{}) error {
 	case float64:
 		if math.IsNaN(value) {
 			*dst = Numeric{Status: Present, NaN: true}
-			return nil
-		} else if math.IsInf(value, 1) {
-			*dst = Numeric{Status: Present, InfinityModifier: Infinity}
-			return nil
-		} else if math.IsInf(value, -1) {
-			*dst = Numeric{Status: Present, InfinityModifier: NegativeInfinity}
 			return nil
 		}
 		num, exp, err := parseNumericString(strconv.FormatFloat(value, 'f', -1, 64))
@@ -212,8 +193,6 @@ func (dst *Numeric) Set(src interface{}) error {
 		} else {
 			return dst.Set(*value)
 		}
-	case InfinityModifier:
-		*dst = Numeric{InfinityModifier: value, Status: Present}
 	default:
 		if originalSrc, ok := underlyingNumberType(src); ok {
 			return dst.Set(originalSrc)
@@ -227,9 +206,6 @@ func (dst *Numeric) Set(src interface{}) error {
 func (dst Numeric) Get() interface{} {
 	switch dst.Status {
 	case Present:
-		if dst.InfinityModifier != None {
-			return dst.InfinityModifier
-		}
 		return dst
 	case Null:
 		return nil
@@ -409,10 +385,6 @@ func (dst *Numeric) toBigInt() (*big.Int, error) {
 func (src *Numeric) toFloat64() (float64, error) {
 	if src.NaN {
 		return math.NaN(), nil
-	} else if src.InfinityModifier == Infinity {
-		return math.Inf(1), nil
-	} else if src.InfinityModifier == NegativeInfinity {
-		return math.Inf(-1), nil
 	}
 
 	buf := make([]byte, 0, 32)
@@ -436,12 +408,6 @@ func (dst *Numeric) DecodeText(ci *ConnInfo, src []byte) error {
 
 	if string(src) == "NaN" {
 		*dst = Numeric{Status: Present, NaN: true}
-		return nil
-	} else if string(src) == "Infinity" {
-		*dst = Numeric{Status: Present, InfinityModifier: Infinity}
-		return nil
-	} else if string(src) == "-Infinity" {
-		*dst = Numeric{Status: Present, InfinityModifier: NegativeInfinity}
 		return nil
 	}
 
@@ -486,23 +452,17 @@ func (dst *Numeric) DecodeBinary(ci *ConnInfo, src []byte) error {
 	}
 
 	rp := 0
-	ndigits := binary.BigEndian.Uint16(src[rp:])
+	ndigits := int16(binary.BigEndian.Uint16(src[rp:]))
 	rp += 2
 	weight := int16(binary.BigEndian.Uint16(src[rp:]))
 	rp += 2
-	sign := binary.BigEndian.Uint16(src[rp:])
+	sign := uint16(binary.BigEndian.Uint16(src[rp:]))
 	rp += 2
 	dscale := int16(binary.BigEndian.Uint16(src[rp:]))
 	rp += 2
 
 	if sign == pgNumericNaNSign {
 		*dst = Numeric{Status: Present, NaN: true}
-		return nil
-	} else if sign == pgNumericPosInfSign {
-		*dst = Numeric{Status: Present, InfinityModifier: Infinity}
-		return nil
-	} else if sign == pgNumericNegInfSign {
-		*dst = Numeric{Status: Present, InfinityModifier: NegativeInfinity}
 		return nil
 	}
 
@@ -544,7 +504,7 @@ func (dst *Numeric) DecodeBinary(ci *ConnInfo, src []byte) error {
 	exp := (int32(weight) - int32(ndigits) + 1) * 4
 
 	if dscale > 0 {
-		fracNBaseDigits := int16(int32(ndigits) - int32(weight) - 1)
+		fracNBaseDigits := ndigits - weight - 1
 		fracDecimalDigits := fracNBaseDigits * 4
 
 		if dscale > fracDecimalDigits {
@@ -615,12 +575,6 @@ func (src Numeric) EncodeText(ci *ConnInfo, buf []byte) ([]byte, error) {
 	if src.NaN {
 		buf = append(buf, "NaN"...)
 		return buf, nil
-	} else if src.InfinityModifier == Infinity {
-		buf = append(buf, "Infinity"...)
-		return buf, nil
-	} else if src.InfinityModifier == NegativeInfinity {
-		buf = append(buf, "-Infinity"...)
-		return buf, nil
 	}
 
 	buf = append(buf, src.Int.String()...)
@@ -639,12 +593,6 @@ func (src Numeric) EncodeBinary(ci *ConnInfo, buf []byte) ([]byte, error) {
 
 	if src.NaN {
 		buf = pgio.AppendUint64(buf, pgNumericNaN)
-		return buf, nil
-	} else if src.InfinityModifier == Infinity {
-		buf = pgio.AppendUint64(buf, pgNumericPosInf)
-		return buf, nil
-	} else if src.InfinityModifier == NegativeInfinity {
-		buf = pgio.AppendUint64(buf, pgNumericNegInf)
 		return buf, nil
 	}
 

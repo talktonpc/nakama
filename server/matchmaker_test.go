@@ -24,8 +24,8 @@ import (
 
 	"github.com/blugelabs/bluge"
 	"github.com/gofrs/uuid"
-	"github.com/heroiclabs/nakama-common/rtapi"
-	"github.com/heroiclabs/nakama-common/runtime"
+	"github.com/talktonpc/nakama-common/rtapi"
+	"github.com/talktonpc/nakama-common/runtime"
 	"go.uber.org/zap"
 	"google.golang.org/protobuf/encoding/protojson"
 )
@@ -1866,7 +1866,7 @@ func TestMatchmakerMaxPartyTracking(t *testing.T) {
 	matchMaker.process(bluge.NewBatch())
 
 	// expect 2 matches
-	if len(matchesSeen) !=2 {
+	if len(matchesSeen) != 2 {
 		t.Fatalf("expected 2 matches, got %d", len(matchesSeen))
 	}
 
@@ -1951,7 +1951,7 @@ func TestMatchmakerMaxSessionTracking(t *testing.T) {
 	matchMaker.process(bluge.NewBatch())
 
 	// expect 2 matches
-	if len(matchesSeen) !=2 {
+	if len(matchesSeen) != 2 {
 		t.Fatalf("expected 2 matches, got %d", len(matchesSeen))
 	}
 

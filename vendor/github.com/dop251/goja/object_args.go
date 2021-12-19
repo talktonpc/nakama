@@ -81,9 +81,9 @@ func (i *argumentsPropIter) next() (propIterItem, iterNextFunc) {
 	return item, i.next
 }
 
-func (a *argumentsObject) iterateStringKeys() iterNextFunc {
+func (a *argumentsObject) enumerateOwnKeys() iterNextFunc {
 	return (&argumentsPropIter{
-		wrapped: a.baseObject.iterateStringKeys(),
+		wrapped: a.baseObject.enumerateOwnKeys(),
 	}).next
 }
 

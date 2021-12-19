@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// BUILD FOR METATOP v1.20.1 (2021-12-09)
-
 //*
 // The Nakama server RPC protocol for games and apps.
 

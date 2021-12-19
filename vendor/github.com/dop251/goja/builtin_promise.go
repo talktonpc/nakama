@@ -2,7 +2,6 @@ package goja
 
 import (
 	"github.com/dop251/goja/unistring"
-	"reflect"
 )
 
 type PromiseState int
@@ -42,8 +41,6 @@ type promiseReaction struct {
 	typ        promiseReactionType
 	handler    *jobCallback
 }
-
-var typePromise = reflect.TypeOf((*Promise)(nil))
 
 // Promise is a Go wrapper around ECMAScript Promise. Calling Runtime.ToValue() on it
 // returns the underlying Object. Calling Export() on a Promise Object returns a Promise.
@@ -137,14 +134,6 @@ func (p *Promise) fulfill(value Value) Value {
 	p.state = PromiseStateFulfilled
 	p.val.runtime.triggerPromiseReactions(reactions, value)
 	return _undefined
-}
-
-func (p *Promise) exportType() reflect.Type {
-	return typePromise
-}
-
-func (p *Promise) export(*objectExportCtx) interface{} {
-	return p
 }
 
 func (r *Runtime) newPromiseResolveThenableJob(p *Promise, thenable Value, then *jobCallback) func() {
@@ -244,7 +233,7 @@ func (r *Runtime) promiseProto_then(call FunctionCall) Value {
 		resultCapability := r.newPromiseCapability(c)
 		return r.performPromiseThen(p, call.Argument(0), call.Argument(1), resultCapability)
 	}
-	panic(r.NewTypeError("Method Promise.prototype.then called on incompatible receiver %s", r.objectproto_toString(FunctionCall{This: thisObj})))
+	panic(r.NewTypeError("Method Promise.prototype.then called on incompatible receiver %s", thisObj))
 }
 
 func (r *Runtime) newPromiseCapability(c *Object) *promiseCapability {
@@ -390,7 +379,7 @@ func (r *Runtime) promise_all(call FunctionCall) Value {
 		iter := r.getIterator(call.Argument(0), nil)
 		var values []Value
 		remainingElementsCount := 1
-		iter.iterate(func(nextValue Value) {
+		r.iterate(iter, func(nextValue Value) {
 			index := len(values)
 			values = append(values, _undefined)
 			nextPromise := promiseResolve(FunctionCall{This: c, Arguments: []Value{nextValue}})
@@ -427,7 +416,7 @@ func (r *Runtime) promise_allSettled(call FunctionCall) Value {
 		iter := r.getIterator(call.Argument(0), nil)
 		var values []Value
 		remainingElementsCount := 1
-		iter.iterate(func(nextValue Value) {
+		r.iterate(iter, func(nextValue Value) {
 			index := len(values)
 			values = append(values, _undefined)
 			nextPromise := promiseResolve(FunctionCall{This: c, Arguments: []Value{nextValue}})
@@ -471,7 +460,7 @@ func (r *Runtime) promise_any(call FunctionCall) Value {
 		iter := r.getIterator(call.Argument(0), nil)
 		var errors []Value
 		remainingElementsCount := 1
-		iter.iterate(func(nextValue Value) {
+		r.iterate(iter, func(nextValue Value) {
 			index := len(errors)
 			errors = append(errors, _undefined)
 			nextPromise := promiseResolve(FunctionCall{This: c, Arguments: []Value{nextValue}})
@@ -511,7 +500,7 @@ func (r *Runtime) promise_race(call FunctionCall) Value {
 	pcap.try(func() {
 		promiseResolve := r.toCallable(c.self.getStr("resolve", nil))
 		iter := r.getIterator(call.Argument(0), nil)
-		iter.iterate(func(nextValue Value) {
+		r.iterate(iter, func(nextValue Value) {
 			nextPromise := promiseResolve(FunctionCall{This: c, Arguments: []Value{nextValue}})
 			r.invoke(nextPromise, "then", pcap.resolveObj, pcap.rejectObj)
 		})

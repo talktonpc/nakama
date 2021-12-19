@@ -505,24 +505,25 @@ func (a *typedArrayObject) getIdx(idx valueInt, receiver Value) Value {
 	return a._getIdx(toIntClamp(int64(idx)))
 }
 
-func (a *typedArrayObject) isValidIntegerIndex(idx int) bool {
-	if a.viewedArrayBuf.ensureNotDetached(false) {
+func (a *typedArrayObject) isValidIntegerIndex(idx int, throw bool) bool {
+	if a.viewedArrayBuf.ensureNotDetached(throw) {
 		if idx >= 0 && idx < a.length {
 			return true
 		}
+		a.val.runtime.typeErrorResult(throw, "Invalid typed array index")
 	}
 	return false
 }
 
 func (a *typedArrayObject) _putIdx(idx int, v Value) {
 	v = v.ToNumber()
-	if a.isValidIntegerIndex(idx) {
+	if a.isValidIntegerIndex(idx, false) {
 		a.typedArray.set(idx+a.offset, v)
 	}
 }
 
 func (a *typedArrayObject) _hasIdx(idx int) bool {
-	return a.isValidIntegerIndex(idx)
+	return a.isValidIntegerIndex(idx, false)
 }
 
 func (a *typedArrayObject) setOwnStr(p unistring.String, v Value, throw bool) bool {
@@ -533,7 +534,7 @@ func (a *typedArrayObject) setOwnStr(p unistring.String, v Value, throw bool) bo
 	}
 	if idx == 0 {
 		v.ToNumber() // make sure it throws
-		return true
+		return false
 	}
 	return a.baseObject.setOwnStr(p, v, throw)
 }
@@ -566,21 +567,6 @@ func (a *typedArrayObject) hasOwnPropertyIdx(idx valueInt) bool {
 	return a._hasIdx(toIntClamp(int64(idx)))
 }
 
-func (a *typedArrayObject) hasPropertyStr(name unistring.String) bool {
-	idx, ok := strToIntNum(name)
-	if ok {
-		return a._hasIdx(idx)
-	}
-	if idx == 0 {
-		return false
-	}
-	return a.baseObject.hasPropertyStr(name)
-}
-
-func (a *typedArrayObject) hasPropertyIdx(idx valueInt) bool {
-	return a.hasOwnPropertyIdx(idx)
-}
-
 func (a *typedArrayObject) _defineIdxProperty(idx int, desc PropertyDescriptor, throw bool) bool {
 	if desc.Configurable == FLAG_FALSE || desc.Enumerable == FLAG_FALSE || desc.IsAccessor() || desc.Writable == FLAG_FALSE {
 		a.val.runtime.typeErrorResult(throw, "Cannot redefine property: %d", idx)
@@ -588,8 +574,7 @@ func (a *typedArrayObject) _defineIdxProperty(idx int, desc PropertyDescriptor, 
 	}
 	_, ok := a._defineOwnProperty(unistring.String(strconv.Itoa(idx)), a.getOwnPropIdx(valueInt(idx)), desc, throw)
 	if ok {
-		if !a.isValidIntegerIndex(idx) {
-			a.val.runtime.typeErrorResult(throw, "Invalid typed array index")
+		if !a.isValidIntegerIndex(idx, throw) {
 			return false
 		}
 		a._putIdx(idx, desc.Value)
@@ -618,7 +603,7 @@ func (a *typedArrayObject) defineOwnPropertyIdx(name valueInt, desc PropertyDesc
 func (a *typedArrayObject) deleteStr(name unistring.String, throw bool) bool {
 	idx, ok := strToIntNum(name)
 	if ok {
-		if a.isValidIntegerIndex(idx) {
+		if !a.isValidIntegerIndex(idx, false) {
 			a.val.runtime.typeErrorResult(throw, "Cannot delete property '%d' of %s", idx, a.val.String())
 			return false
 		}
@@ -631,7 +616,7 @@ func (a *typedArrayObject) deleteStr(name unistring.String, throw bool) bool {
 }
 
 func (a *typedArrayObject) deleteIdx(idx valueInt, throw bool) bool {
-	if a.viewedArrayBuf.ensureNotDetached(false) && idx >= 0 && int64(idx) < int64(a.length) {
+	if a.viewedArrayBuf.ensureNotDetached(throw) && idx >= 0 && int64(idx) < int64(a.length) {
 		a.val.runtime.typeErrorResult(throw, "Cannot delete property '%d' of %s", idx, a.val.String())
 		return false
 	}
@@ -639,14 +624,14 @@ func (a *typedArrayObject) deleteIdx(idx valueInt, throw bool) bool {
 	return true
 }
 
-func (a *typedArrayObject) stringKeys(all bool, accum []Value) []Value {
+func (a *typedArrayObject) ownKeys(all bool, accum []Value) []Value {
 	if accum == nil {
 		accum = make([]Value, 0, a.length)
 	}
 	for i := 0; i < a.length; i++ {
 		accum = append(accum, asciiString(strconv.Itoa(i)))
 	}
-	return a.baseObject.stringKeys(all, accum)
+	return a.baseObject.ownKeys(all, accum)
 }
 
 type typedArrayPropIter struct {
@@ -659,13 +644,13 @@ func (i *typedArrayPropIter) next() (propIterItem, iterNextFunc) {
 		name := strconv.Itoa(i.idx)
 		prop := i.a._getIdx(i.idx)
 		i.idx++
-		return propIterItem{name: asciiString(name), value: prop}, i.next
+		return propIterItem{name: unistring.String(name), value: prop}, i.next
 	}
 
-	return i.a.baseObject.iterateStringKeys()()
+	return i.a.baseObject.enumerateOwnKeys()()
 }
 
-func (a *typedArrayObject) iterateStringKeys() iterNextFunc {
+func (a *typedArrayObject) enumerateOwnKeys() iterNextFunc {
 	return (&typedArrayPropIter{
 		a: a,
 	}).next
@@ -729,7 +714,8 @@ func (r *Runtime) newFloat64ArrayObject(buf *arrayBufferObject, offset, length i
 	return r._newTypedArrayObject(buf, offset, length, 8, r.global.Float64Array, (*float64Array)(unsafe.Pointer(&buf.data)), proto)
 }
 
-func (o *dataViewObject) getIdxAndByteOrder(getIdx int, littleEndianVal Value, size int) (int, byteOrder) {
+func (o *dataViewObject) getIdxAndByteOrder(idxVal, littleEndianVal Value, size int) (int, byteOrder) {
+	getIdx := o.val.runtime.toIndex(idxVal)
 	o.viewedArrayBuf.ensureNotDetached(true)
 	if getIdx+size > o.byteLen {
 		panic(o.val.runtime.newError(o.val.runtime.global.RangeError, "Index %d is out of bounds", getIdx))
@@ -807,7 +793,6 @@ func (o *arrayBufferObject) getUint32(idx int, byteOrder byteOrder) uint32 {
 }
 
 func (o *arrayBufferObject) setUint32(idx int, val uint32, byteOrder byteOrder) {
-	o.ensureNotDetached(true)
 	if byteOrder == nativeEndian {
 		*(*uint32)(unsafe.Pointer(&o.data[idx])) = val
 	} else {

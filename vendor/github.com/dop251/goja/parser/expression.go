@@ -183,7 +183,7 @@ func (self *_parser) parseRegExpLiteral() *ast.RegExpLiteral {
 	pattern, _, err := self.scanString(offset, false)
 	endOffset := self.chrOffset
 
-	if err == "" {
+	if err == nil {
 		pattern = pattern[1 : len(pattern)-1]
 	}
 
@@ -274,12 +274,12 @@ func (self *_parser) parseVarDeclarationList(var_ file.Idx) []*ast.Binding {
 	return declarationList
 }
 
-func (self *_parser) parseObjectPropertyKey() (string, unistring.String, ast.Expression, token.Token) {
+func (self *_parser) parseObjectPropertyKey() (unistring.String, ast.Expression, token.Token) {
 	if self.token == token.LEFT_BRACKET {
 		self.next()
 		expr := self.parseAssignmentExpression()
 		self.expect(token.RIGHT_BRACKET)
-		return "", "", expr, token.ILLEGAL
+		return "", expr, token.ILLEGAL
 	}
 	idx, tkn, literal, parsedLiteral := self.idx, self.token, self.literal, self.parsedLiteral
 	var value ast.Expression
@@ -289,7 +289,7 @@ func (self *_parser) parseObjectPropertyKey() (string, unistring.String, ast.Exp
 		value = &ast.StringLiteral{
 			Idx:     idx,
 			Literal: literal,
-			Value:   parsedLiteral,
+			Value:   unistring.String(literal),
 		}
 	case token.NUMBER:
 		num, err := parseNumberLiteral(literal)
@@ -302,7 +302,7 @@ func (self *_parser) parseObjectPropertyKey() (string, unistring.String, ast.Exp
 				Value:   num,
 			}
 		}
-	case token.STRING, token.KEYWORD:
+	case token.STRING:
 		value = &ast.StringLiteral{
 			Idx:     idx,
 			Literal: literal,
@@ -319,7 +319,7 @@ func (self *_parser) parseObjectPropertyKey() (string, unistring.String, ast.Exp
 			tkn = token.KEYWORD
 		}
 	}
-	return literal, parsedLiteral, value, tkn
+	return parsedLiteral, value, tkn
 }
 
 func (self *_parser) parseObjectProperty() ast.Property {
@@ -329,19 +329,18 @@ func (self *_parser) parseObjectProperty() ast.Property {
 			Expression: self.parseAssignmentExpression(),
 		}
 	}
-	keyStartIdx := self.idx
-	literal, parsedLiteral, value, tkn := self.parseObjectPropertyKey()
+	literal, value, tkn := self.parseObjectPropertyKey()
 	if tkn == token.IDENTIFIER || tkn == token.STRING || tkn == token.KEYWORD || tkn == token.ILLEGAL {
 		switch {
 		case self.token == token.LEFT_PARENTHESIS:
+			idx := self.idx
 			parameterList := self.parseFunctionParameterList()
 
 			node := &ast.FunctionLiteral{
-				Function:      keyStartIdx,
+				Function:      idx,
 				ParameterList: parameterList,
 			}
 			node.Body, node.DeclarationList = self.parseFunctionBlock()
-			node.Source = self.slice(keyStartIdx, node.Body.Idx1())
 
 			return &ast.PropertyKeyed{
 				Key:   value,
@@ -359,44 +358,44 @@ func (self *_parser) parseObjectProperty() ast.Property {
 				}
 				return &ast.PropertyShort{
 					Name: ast.Identifier{
-						Name: parsedLiteral,
+						Name: literal,
 						Idx:  value.Idx0(),
 					},
 					Initializer: initializer,
 				}
 			}
 		case literal == "get" && self.token != token.COLON:
-			_, _, keyValue, _ := self.parseObjectPropertyKey()
+			idx := self.idx
+			_, value, _ := self.parseObjectPropertyKey()
 			idx1 := self.idx
 			parameterList := self.parseFunctionParameterList()
 			if len(parameterList.List) > 0 || parameterList.Rest != nil {
 				self.error(idx1, "Getter must not have any formal parameters.")
 			}
 			node := &ast.FunctionLiteral{
-				Function:      keyStartIdx,
+				Function:      idx,
 				ParameterList: parameterList,
 			}
 			node.Body, node.DeclarationList = self.parseFunctionBlock()
-			node.Source = self.slice(keyStartIdx, node.Body.Idx1())
 			return &ast.PropertyKeyed{
-				Key:   keyValue,
+				Key:   value,
 				Kind:  ast.PropertyKindGet,
 				Value: node,
 			}
 		case literal == "set" && self.token != token.COLON:
-			_, _, keyValue, _ := self.parseObjectPropertyKey()
+			idx := self.idx
+			_, value, _ := self.parseObjectPropertyKey()
 			parameterList := self.parseFunctionParameterList()
 
 			node := &ast.FunctionLiteral{
-				Function:      keyStartIdx,
+				Function:      idx,
 				ParameterList: parameterList,
 			}
 
 			node.Body, node.DeclarationList = self.parseFunctionBlock()
-			node.Source = self.slice(keyStartIdx, node.Body.Idx1())
 
 			return &ast.PropertyKeyed{
-				Key:   keyValue,
+				Key:   value,
 				Kind:  ast.PropertyKindSet,
 				Value: node,
 			}
@@ -406,10 +405,9 @@ func (self *_parser) parseObjectProperty() ast.Property {
 	self.expect(token.COLON)
 
 	return &ast.PropertyKeyed{
-		Key:      value,
-		Kind:     ast.PropertyKindValue,
-		Value:    self.parseAssignmentExpression(),
-		Computed: tkn == token.ILLEGAL,
+		Key:   value,
+		Kind:  ast.PropertyKindValue,
+		Value: self.parseAssignmentExpression(),
 	}
 }
 
@@ -472,17 +470,17 @@ func (self *_parser) parseTemplateLiteral(tagged bool) *ast.TemplateLiteral {
 	for self.chr != -1 {
 		start := self.idx + 1
 		literal, parsed, finished, parseErr, err := self.parseTemplateCharacters()
-		if err != "" {
-			self.error(self.idx, err)
+		if err != nil {
+			self.error(self.idx, err.Error())
 		}
 		res.Elements = append(res.Elements, &ast.TemplateElement{
 			Idx:     start,
 			Literal: literal,
 			Parsed:  parsed,
-			Valid:   parseErr == "",
+			Valid:   parseErr == nil,
 		})
-		if !tagged && parseErr != "" {
-			self.error(self.idx, parseErr)
+		if !tagged && parseErr != nil {
+			self.error(self.idx, parseErr.Error())
 		}
 		end := self.idx + 1
 		self.next()
@@ -507,21 +505,23 @@ func (self *_parser) parseTaggedTemplateLiteral(tag ast.Expression) *ast.Templat
 
 func (self *_parser) parseArgumentList() (argumentList []ast.Expression, idx0, idx1 file.Idx) {
 	idx0 = self.expect(token.LEFT_PARENTHESIS)
-	for self.token != token.RIGHT_PARENTHESIS {
-		var item ast.Expression
-		if self.token == token.ELLIPSIS {
-			self.next()
-			item = &ast.SpreadElement{
-				Expression: self.parseAssignmentExpression(),
+	if self.token != token.RIGHT_PARENTHESIS {
+		for {
+			var item ast.Expression
+			if self.token == token.ELLIPSIS {
+				self.next()
+				item = &ast.SpreadElement{
+					Expression: self.parseAssignmentExpression(),
+				}
+			} else {
+				item = self.parseAssignmentExpression()
 			}
-		} else {
-			item = self.parseAssignmentExpression()
+			argumentList = append(argumentList, item)
+			if self.token != token.COMMA {
+				break
+			}
+			self.next()
 		}
-		argumentList = append(argumentList, item)
-		if self.token != token.COMMA {
-			break
-		}
-		self.next()
 	}
 	idx1 = self.expect(token.RIGHT_PARENTHESIS)
 	return
@@ -546,11 +546,6 @@ func (self *_parser) parseDotMember(left ast.Expression) ast.Expression {
 	if self.token != token.IDENTIFIER && !isId(self.token) {
 		self.expect(token.IDENTIFIER)
 		self.nextStatement()
-		return &ast.BadExpression{From: period, To: self.idx}
-	}
-
-	if leftStr, ok := left.(*ast.StringLiteral); ok && leftStr.Value == "new" {
-		self.error(left.Idx0(), "Keyword must not contain escaped characters")
 		return &ast.BadExpression{From: period, To: self.idx}
 	}
 
@@ -581,7 +576,8 @@ func (self *_parser) parseNewExpression() ast.Expression {
 	idx := self.expect(token.NEW)
 	if self.token == token.PERIOD {
 		self.next()
-		if self.literal == "target" {
+		prop := self.parseIdentifier()
+		if prop.Name == "target" {
 			if !self.scope.inFunction {
 				self.error(idx, "new.target expression is not allowed here")
 			}
@@ -590,16 +586,12 @@ func (self *_parser) parseNewExpression() ast.Expression {
 					Name: unistring.String(token.NEW.String()),
 					Idx:  idx,
 				},
-				Property: self.parseIdentifier(),
+				Property: prop,
 			}
 		}
 		self.errorUnexpectedToken(token.IDENTIFIER)
 	}
 	callee := self.parseLeftHandSideExpression()
-	if bad, ok := callee.(*ast.BadExpression); ok {
-		bad.From = idx
-		return bad
-	}
 	node := &ast.NewExpression{
 		New:    idx,
 		Callee: callee,
