@@ -188,19 +188,19 @@ To build the codebase and generate all sources follow these steps.
    ```
 6. Build docker image for linux container on windows PC.
    ```shell
-   > docker build -f ./build/Dockerfile -t lonycell/nakama-server:v3.9.1-metatop --build-arg version=v3.9.1-metatop .
-   > docker push lonycell/nakama-server:v3.9.1-metatop
+   > docker build -f ./build/Dockerfile -t lonycell/nakama-server:v3.9.2-metatop --build-arg version=v3.9.2-metatop .
+   > docker push lonycell/nakama-server:v3.9.2-metatop
    ```
 
 7. Build plugin builder docker image for linux container on windows PC.
    ```shell
-   > docker build . -f ./build/pluginbuilder/Dockerfile -t lonycell/nakama-pluginbuilder:v3.9.1-metatop --build-arg version=v3.9.1-mata
-   > docker push lonycell/nakama-pluginbuilder:v3.9.1-metatop
+   > docker build . -f ./build/pluginbuilder/Dockerfile -t lonycell/nakama-pluginbuilder:v3.9.2-metatop --build-arg version=v3.9.2-mata
+   > docker push lonycell/nakama-pluginbuilder:v3.9.2-metatop
    ```
 
 ### Sorcuts
    ```shell
-   > go build -trimpath -mod=vendor -ldflags "-s -w -X main.version=v3.9.1-metatop" 
+   > go build -trimpath -mod=vendor -ldflags "-s -w -X main.version=v3.9.2-metatop" 
    > ./nakama migrate up --database.address postgres:localdb@localhost:15432/metatop
    > ./nakama --name nakama-metatop --database.address postgres:localdb@localhost:15432/metatop --logger.level INFO --session.token_expiry_sec 7200 --socket.server_key "metatop-choco-server" --data_dir ../nakama-addon/metatop-hello
    ```
@@ -212,7 +212,7 @@ To build the codebase and generate all sources follow these steps.
 
    ```shell
    > build plugin on native compiler
-   > go build -buildmode=plugin -ldflags "-s -w -X main.version=v3.9.1-metatop" -trimpath -o ./modules/metatop-hello.so
+   > go build -buildmode=plugin -ldflags "-s -w -X main.version=v3.9.2-metatop" -trimpath -o ./modules/metatop-hello.so
    ```
 
 

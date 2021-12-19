@@ -2,7 +2,7 @@ version: '3'
 services:
   metatop-nakama:
     container_name: metatop-nakama
-    image: lonycell/nakama-server:v3.9.1-metatop
+    image: lonycell/nakama-server:v3.9.2-metatop
     entrypoint:
       - "/bin/sh"
       - "-ecx"
@@ -11,7 +11,7 @@ services:
           exec /nakama/nakama --name nakama-metatop --database.address postgres:localdb@host.docker.internal:15432/metatop --logger.level INFO --session.token_expiry_sec 7200 --socket.server_key "metatop-choco-server"
     restart: always
     volumes:
-      - D:\works\servers\nakama-modules\data\:/nakama/data
+      - ../nakama-modules/data/:/nakama/data
     expose:
       - "7349"
       - "7350"
